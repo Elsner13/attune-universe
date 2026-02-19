@@ -15,40 +15,46 @@ const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
 const intelligenceBriefs = [
   {
-    timestamp: "2026.02.18 — 06:14 UTC",
-    topic: "Why \"Random Practice\" Is a Lie",
-    tag: "CONSTRAINTS",
+    timestamp: "2026.02.19",
+    topic: "Fire Horse: Ecological Rebirth",
+    tag: "ARCHETYPE",
     strength: 98,
+    url: "https://findthesignal.substack.com/p/fire-horse-ecological-rebirth",
   },
   {
-    timestamp: "2026.02.11 — 05:47 UTC",
-    topic: "The Affordance Landscape Nobody Talks About",
-    tag: "PERCEPTION",
-    strength: 94,
-  },
-  {
-    timestamp: "2026.02.04 — 07:02 UTC",
-    topic: "Ecological Dynamics vs. Motor Programs",
-    tag: "THEORY",
-    strength: 91,
-  },
-  {
-    timestamp: "2026.01.28 — 06:30 UTC",
-    topic: "Coupling: The Missing Variable in Your Training",
-    tag: "SKILL ACQ.",
+    timestamp: "2026.02.17",
+    topic: "Monk Mode Is a Lie (And Why Wizards Win)",
+    tag: "STRATEGY",
     strength: 96,
+    url: "https://findthesignal.substack.com/p/monk-mode-is-a-lie-and-why-wizards",
   },
   {
-    timestamp: "2026.01.21 — 05:58 UTC",
-    topic: "How Elite Coaches Design Representative Practice",
-    tag: "COACHING",
+    timestamp: "2026.02.11",
+    topic: "The Brain\u2019s Twinkling Dance",
+    tag: "NEUROSCIENCE",
+    strength: 94,
+    url: "https://findthesignal.substack.com/p/the-brains-twinkling-dance",
+  },
+  {
+    timestamp: "2026.02.09",
+    topic: "When Questioning Becomes Treason",
+    tag: "CULTURE",
     strength: 93,
+    url: "https://findthesignal.substack.com/p/when-questioning-becomes-treason",
   },
   {
-    timestamp: "2026.01.14 — 06:22 UTC",
-    topic: "Nonlinear Pedagogy — A Field Guide",
-    tag: "METHODOLOGY",
-    strength: 89,
+    timestamp: "2026.02.06",
+    topic: "The Flatlanders: Why Most People Think in One Dimension",
+    tag: "PERCEPTION",
+    strength: 95,
+    url: "https://findthesignal.substack.com/p/the-flatlanders-why-most-people-think",
+  },
+  {
+    timestamp: "2026.02.03",
+    topic: "The Sovereign\u2019s First Skill: Perceiving What Others Cannot",
+    tag: "SKILL ACQ.",
+    strength: 97,
+    url: "https://findthesignal.substack.com/p/the-sovereigns-first-skill-perceiving",
   },
 ];
 
@@ -160,7 +166,7 @@ export function SignalSection() {
                 <div className="flex gap-8">
                   <div>
                     <div className="font-mono text-2xl font-bold tabular-nums text-attune-yellow">
-                      500+
+                      538+
                     </div>
                     <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-attune-starlight/30">
                       Subscribers
@@ -208,7 +214,7 @@ export function SignalSection() {
                 {intelligenceBriefs.map((brief, i) => (
                   <motion.a
                     key={brief.topic}
-                    href="https://findthesignal.substack.com/"
+                    href={brief.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, x: 40 }}
@@ -283,7 +289,7 @@ export function SignalSection() {
                 DECODE THE UNIVERSE.
                 <br />
                 <span className="text-attune-yellow text-glow-yellow">
-                  JOIN 500+ MASTERING THE SIGNAL.
+                  JOIN 538+ MASTERING THE SIGNAL.
                 </span>
               </p>
 
