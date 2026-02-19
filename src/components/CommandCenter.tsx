@@ -72,6 +72,7 @@ export function CommandCenter({ domain }: { domain?: string }) {
       {/* User */}
       <div className="border-t border-white/[0.04] px-4 py-3">
         <UserButton
+          afterSignOutUrl="/foundations"
           appearance={{
             elements: {
               avatarBox: "size-7 border border-white/10",
