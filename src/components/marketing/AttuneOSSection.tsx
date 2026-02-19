@@ -7,7 +7,6 @@ import {
   useTransform,
   useSpring,
   useMotionValue,
-  useMotionTemplate,
   type MotionValue,
 } from "framer-motion";
 import {
@@ -323,10 +322,6 @@ export function AttuneOSSection() {
     { stiffness: 150, damping: 30 }
   );
 
-  const spotlightX = useMotionValue(50);
-  const spotlightY = useMotionValue(50);
-  const spotlightBg = useMotionTemplate`radial-gradient(600px circle at ${spotlightX}% ${spotlightY}%, rgba(0, 180, 255, 0.03), transparent 70%)`;
-
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -334,10 +329,8 @@ export function AttuneOSSection() {
       const y = (e.clientY - rect.top) / rect.height - 0.5;
       mouseX.set(x);
       mouseY.set(y);
-      spotlightX.set(((e.clientX - rect.left) / rect.width) * 100);
-      spotlightY.set(((e.clientY - rect.top) / rect.height) * 100);
     },
-    [mouseX, mouseY, spotlightX, spotlightY]
+    [mouseX, mouseY]
   );
 
   const handleMouseLeave = useCallback(() => {
@@ -352,12 +345,6 @@ export function AttuneOSSection() {
       onMouseLeave={handleMouseLeave}
       className="relative min-h-[280vh]"
     >
-      {/* Spotlight follow layer */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{ background: spotlightBg }}
-      />
-
       {/* ═══════════════════════════════════════
           Sticky "THE OS." watermark
           ═══════════════════════════════════════ */}
@@ -458,7 +445,7 @@ export function AttuneOSSection() {
                     delay: i * 0.07,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="group flex flex-col items-center gap-3 rounded-xl border border-attune-blue/8 bg-[#080808]/80 px-4 py-5 text-center backdrop-blur-sm transition-colors duration-500 hover:border-attune-blue/20"
+                  className="group flex flex-col items-center gap-3 rounded-xl border border-attune-blue/8 bg-[#080808] px-4 py-5 text-center transition-colors duration-500 hover:border-attune-blue/20"
                 >
                   <div className="flex size-9 items-center justify-center rounded-lg bg-attune-blue/6 transition-colors duration-500 group-hover:bg-attune-blue/10">
                     <spec.icon className="size-4 text-attune-blue/50 transition-colors duration-500 group-hover:text-attune-blue/80" />
@@ -483,7 +470,7 @@ export function AttuneOSSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-blue/15 bg-[#080808]/90 backdrop-blur-xl"
+            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-blue/15 bg-[#080808]"
           >
             {/* Border glow effect */}
             <div className="pointer-events-none absolute -inset-px rounded-3xl bg-linear-to-b from-attune-blue/20 via-transparent to-attune-blue/10 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
@@ -566,7 +553,7 @@ export function AttuneOSSection() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="border-attune-blue/10 bg-attune-void/60 pl-9 text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-blue/30 focus-visible:ring-attune-blue/20"
+                        className="border-attune-blue/10 bg-attune-void pl-9 text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-blue/30 focus-visible:ring-attune-blue/20"
                       />
                     </div>
                     <Button

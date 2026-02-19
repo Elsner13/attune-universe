@@ -223,7 +223,7 @@ export function SignalSection() {
                       delay: i * 0.08,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="group block overflow-hidden rounded-xl border border-white/5 bg-[#080808]/80 p-5 backdrop-blur-sm transition-all duration-400 hover:border-attune-yellow/20 hover:bg-[#0a0a0a]"
+                    className="group block overflow-hidden rounded-xl border border-white/5 bg-[#080808] p-5 transition-all duration-400 hover:border-attune-yellow/20 hover:bg-[#0a0a0a]"
                   >
                     {/* Top row: timestamp + tag */}
                     <div className="mb-3 flex items-center justify-between">
@@ -259,7 +259,7 @@ export function SignalSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-yellow/15 bg-[#080808]/90 backdrop-blur-xl"
+            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-yellow/15 bg-[#080808]"
           >
             <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-yellow/6 blur-[80px]" />
             <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-yellow/4 blur-[80px]" />
@@ -325,7 +325,7 @@ export function SignalSection() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="border-attune-yellow/10 bg-attune-void/60 pl-9 font-mono text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-yellow/30 focus-visible:ring-attune-yellow/20"
+                        className="border-attune-yellow/10 bg-attune-void pl-9 font-mono text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-yellow/30 focus-visible:ring-attune-yellow/20"
                       />
                     </div>
                     <Button

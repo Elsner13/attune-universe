@@ -134,7 +134,7 @@ export function AttractorSection() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto mb-24 max-w-xl"
           >
-            <div className="rounded-2xl border border-attune-purple/20 bg-attune-obsidian/60 px-6 py-5 backdrop-blur-sm">
+            <div className="rounded-2xl border border-attune-purple/20 bg-[#0c0c0c] px-6 py-5">
               <p className="mb-3 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-attune-purple/70">
                 Next Cohort Opens In
               </p>
@@ -177,7 +177,7 @@ export function AttractorSection() {
                   delay: i * 0.08,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group flex flex-col items-center gap-3 rounded-2xl border border-white/4 bg-attune-obsidian/40 px-4 py-6 text-center backdrop-blur-sm transition-colors duration-500 hover:border-attune-purple/20"
+                className="group flex flex-col items-center gap-3 rounded-2xl border border-white/4 bg-[#0a0a0a] px-4 py-6 text-center transition-colors duration-500 hover:border-attune-purple/20"
               >
                 <div className="flex size-10 items-center justify-center rounded-xl bg-attune-purple/10 transition-colors duration-500 group-hover:bg-attune-purple/20">
                   <feat.icon className="size-5 text-attune-purple/70 transition-colors duration-500 group-hover:text-attune-purple" />
@@ -201,7 +201,7 @@ export function AttractorSection() {
                 : { opacity: 0, y: 50, scale: 0.97 }
             }
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="glow-purple relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-purple/25 bg-attune-obsidian/80 backdrop-blur-xl"
+            className="glow-purple relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-purple/25 bg-[#0c0c0c]"
           >
             {/* Glow aura */}
             <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-purple/10 blur-[80px]" />

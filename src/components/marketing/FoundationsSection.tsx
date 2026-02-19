@@ -118,7 +118,7 @@ export function FoundationsSection() {
                   delay: i * 0.15,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/6 bg-attune-obsidian/40 p-8 backdrop-blur-sm transition-colors duration-500 hover:border-attune-green/15"
+                className="group relative overflow-hidden rounded-2xl border border-white/6 bg-[#0a0a0a] p-8 transition-colors duration-500 hover:border-attune-green/15"
               >
                 <div className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-attune-green/3 blur-2xl transition-all duration-500 group-hover:bg-attune-green/6" />
                 <div className="relative">
@@ -170,7 +170,7 @@ export function FoundationsSection() {
                 : { opacity: 0, y: 50, scale: 0.97 }
             }
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="glow-green-lg relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-green/20 bg-attune-obsidian/80 backdrop-blur-xl"
+            className="glow-green-lg relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-green/20 bg-[#0c0c0c]"
           >
             {/* Glow aura */}
             <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-green/8 blur-[80px]" />

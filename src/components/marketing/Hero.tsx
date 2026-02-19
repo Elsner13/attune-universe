@@ -90,7 +90,7 @@ export function Hero() {
               ──────────────────────────── */}
           <motion.div
             variants={scaleIn}
-            className="group relative overflow-hidden rounded-2xl border border-white/6 bg-attune-obsidian/60 backdrop-blur-sm md:col-span-7 md:row-span-2"
+            className="group relative overflow-hidden rounded-2xl border border-white/6 bg-[#0c0c0c] md:col-span-7 md:row-span-2"
           >
             {/* 16:9 video placeholder */}
             <div className="relative aspect-video w-full overflow-hidden">
@@ -102,13 +102,13 @@ export function Hero() {
 
               {/* Play button */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <button className="group/play flex size-20 items-center justify-center rounded-full border border-attune-green/30 bg-attune-green/10 text-attune-green backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:border-attune-green/60 hover:bg-attune-green/20 hover:shadow-[0_0_40px_rgba(0,255,148,0.25)] sm:size-24">
+                <button className="group/play flex size-20 items-center justify-center rounded-full border border-attune-green/30 bg-attune-green/10 text-attune-green transition-all duration-300 hover:scale-110 hover:border-attune-green/60 hover:bg-attune-green/20 hover:shadow-[0_0_40px_rgba(0,255,148,0.25)] sm:size-24">
                   <Play className="size-8 fill-current sm:size-10" />
                 </button>
               </div>
 
               {/* Corner badge */}
-              <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-md bg-attune-void/70 px-2.5 py-1 backdrop-blur-sm">
+              <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-md bg-attune-void px-2.5 py-1">
                 <div className="size-1.5 animate-pulse rounded-full bg-attune-green" />
                 <span className="font-mono text-[9px] uppercase tracking-widest text-attune-starlight/70">
                   Manifesto
@@ -142,7 +142,7 @@ export function Hero() {
               ────────────────────────── */}
           <motion.div
             variants={scaleIn}
-            className="group relative overflow-hidden rounded-2xl border border-attune-green/20 bg-attune-obsidian/60 p-6 backdrop-blur-sm transition-all duration-500 hover:border-attune-green/40 sm:p-7 md:col-span-5 glow-green"
+            className="group relative overflow-hidden rounded-2xl border border-attune-green/20 bg-[#0c0c0c] p-6 transition-all duration-500 hover:border-attune-green/40 sm:p-7 md:col-span-5 glow-green"
           >
             {/* Active glow accent */}
             <div className="pointer-events-none absolute -right-12 -top-12 size-40 rounded-full bg-attune-green/[0.07] blur-3xl" />
@@ -188,7 +188,7 @@ export function Hero() {
               ────────────────────────────── */}
           <motion.div
             variants={scaleIn}
-            className="group relative overflow-hidden rounded-2xl border border-attune-purple/15 bg-attune-obsidian/60 p-6 backdrop-blur-sm transition-all duration-500 hover:border-attune-purple/30 sm:p-7 md:col-span-5"
+            className="group relative overflow-hidden rounded-2xl border border-attune-purple/15 bg-[#0c0c0c] p-6 transition-all duration-500 hover:border-attune-purple/30 sm:p-7 md:col-span-5"
           >
             <div className="pointer-events-none absolute -left-12 -top-12 size-40 rounded-full bg-attune-purple/[0.07] blur-3xl" />
 
@@ -236,7 +236,7 @@ export function Hero() {
               ────────────────────── */}
           <motion.div
             variants={scaleIn}
-            className="group relative overflow-hidden rounded-2xl border border-white/6 bg-attune-obsidian/60 p-6 backdrop-blur-sm sm:p-7 md:col-span-12"
+            className="group relative overflow-hidden rounded-2xl border border-white/6 bg-[#0c0c0c] p-6 sm:p-7 md:col-span-12"
           >
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-12">
               <div className="flex items-start gap-4 md:items-center">
@@ -286,7 +286,7 @@ export function Hero() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="border-white/6 bg-attune-void/60 pl-9 text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-green/30 focus-visible:ring-attune-green/20"
+                      className="border-white/6 bg-attune-void pl-9 text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-green/30 focus-visible:ring-attune-green/20"
                     />
                   </div>
                   <Button
