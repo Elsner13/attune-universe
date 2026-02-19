@@ -2,39 +2,105 @@
 
 import { useState, useEffect, useRef, useTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Crosshair, Lock, Target, Zap, Pencil, Check, X } from "lucide-react";
+import {
+  Crosshair,
+  Target,
+  Zap,
+  Pencil,
+  Check,
+  X,
+  AlertTriangle,
+  ChevronRight,
+  Lock,
+  Eye,
+  GitBranch,
+  Layers,
+  Activity,
+  Orbit,
+  Map,
+  Rocket,
+} from "lucide-react";
 import { updateFoundationsField } from "./actions";
 
-const slamIn = {
-  hidden: { y: 40, opacity: 0, filter: "blur(6px)" },
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const snap = {
+  hidden: { y: 30, opacity: 0 },
   visible: (i: number) => ({
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
-    transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-    },
+    transition: { delay: i * 0.06, duration: 0.35, ease: EASE },
   }),
 };
+
+const MODULES = [
+  {
+    id: "M00",
+    title: "The Blueprint",
+    subtitle: "Reference Architecture",
+    icon: Map,
+    accent: "attune-signal",
+  },
+  {
+    id: "M01",
+    title: "The Ecological Revolution",
+    subtitle: "Perception Rewired",
+    icon: Eye,
+    accent: "attune-signal",
+  },
+  {
+    id: "M02",
+    title: "Perception-Action Coupling",
+    subtitle: "Close the Loop",
+    icon: GitBranch,
+    accent: "attune-signal",
+  },
+  {
+    id: "M03",
+    title: "Constraints & Affordances",
+    subtitle: "Architect Your Environment",
+    icon: Layers,
+    accent: "attune-signal",
+  },
+  {
+    id: "M04",
+    title: "Dynamic Systems Theory",
+    subtitle: "Self-Organization",
+    icon: Activity,
+    accent: "attune-signal",
+  },
+  {
+    id: "M05",
+    title: "The Attunement Protocol",
+    subtitle: "Ecological Mastery",
+    icon: Orbit,
+    accent: "attune-signal",
+  },
+  {
+    id: "M06",
+    title: "The Attractor State",
+    subtitle: "Achieve Escape Velocity",
+    icon: Rocket,
+    accent: "attune-signal",
+  },
+];
 
 function BootSequence({ onComplete }: { onComplete: () => void }) {
   const [line, setLine] = useState(0);
 
   const lines = [
     "> ATTUNE FOUNDATIONS v1.0",
-    "> Loading perception-action matrix...",
-    "> Signal locked.",
+    "> Syncing ecological matrix...",
+    "> Constraint engine loaded.",
     "> SYSTEM ONLINE.",
   ];
 
   useEffect(() => {
     if (line < lines.length) {
-      const timer = setTimeout(() => setLine((l) => l + 1), 350);
+      const timer = setTimeout(() => setLine((l) => l + 1), 250);
       return () => clearTimeout(timer);
     } else {
-      const timer = setTimeout(onComplete, 400);
+      const timer = setTimeout(onComplete, 300);
       return () => clearTimeout(timer);
     }
   }, [line, lines.length, onComplete]);
@@ -42,13 +108,13 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center bg-[#030303]"
-      exit={{ opacity: 0, filter: "blur(8px)" }}
-      transition={{ duration: 0.4 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
     >
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.15, 0] }}
-        transition={{ duration: 0.6, delay: 0.1 }}
+        animate={{ opacity: [0, 0.12, 0] }}
+        transition={{ duration: 0.4, delay: 0.05 }}
         className="absolute inset-0 bg-attune-signal"
       />
       <div className="relative w-full max-w-lg px-6">
@@ -56,9 +122,9 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
           {lines.slice(0, line).map((text, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -10 }}
+              initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.1 }}
               className={
                 i === lines.length - 1
                   ? "font-bold text-attune-signal"
@@ -77,18 +143,14 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
   );
 }
 
-function EditableCard({
-  icon: Icon,
+function EditableField({
   label,
   value,
   field,
-  index,
 }: {
-  icon: React.ComponentType<{ className?: string }>;
   label: string;
   value: string;
   field: "domain" | "constraint" | "goal";
-  index: number;
 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(value);
@@ -129,78 +191,125 @@ function EditableCard({
   }
 
   return (
-    <motion.div
-      custom={index}
-      variants={slamIn}
-      className="group relative rounded-lg border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-white/[0.10]"
-    >
-      {/* Edit trigger */}
+    <div className="group flex items-start justify-between gap-3">
+      <div className="min-w-0 flex-1">
+        <p className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-white/25">
+          {label}
+        </p>
+        <AnimatePresence mode="wait">
+          {editing ? (
+            <motion.div
+              key="edit"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.1 }}
+              className="mt-1"
+            >
+              <textarea
+                ref={inputRef}
+                value={draft}
+                onChange={(e) => setDraft(e.target.value)}
+                onKeyDown={handleKeyDown}
+                onBlur={save}
+                rows={1}
+                spellCheck={false}
+                className="font-kinetic w-full resize-none border-0 border-b border-attune-signal/40 bg-transparent text-sm font-bold leading-snug text-white focus:border-attune-signal focus:outline-none"
+              />
+              <div className="mt-2 flex items-center gap-1.5">
+                <button
+                  onClick={save}
+                  disabled={isPending}
+                  className="flex items-center gap-1 rounded bg-attune-signal/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-attune-signal hover:bg-attune-signal hover:text-[#030303] disabled:opacity-40"
+                >
+                  <Check className="size-2.5" />
+                  {isPending ? "..." : "SAVE"}
+                </button>
+                <button
+                  onClick={cancel}
+                  className="flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white/25 hover:text-white/60"
+                >
+                  <X className="size-2.5" />
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.p
+              key="display"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="font-kinetic mt-0.5 cursor-pointer truncate text-sm font-bold text-white/90"
+              onClick={() => setEditing(true)}
+            >
+              {value || "—"}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
       {!editing && (
         <button
           onClick={() => setEditing(true)}
-          className="absolute right-4 top-4 flex size-7 items-center justify-center rounded border border-white/[0.06] bg-white/[0.03] text-white/20 opacity-0 transition-all group-hover:opacity-100 hover:border-attune-signal/30 hover:text-attune-signal"
+          className="mt-3 flex size-5 shrink-0 items-center justify-center rounded text-white/10 opacity-0 transition-all group-hover:opacity-100 hover:text-attune-signal"
         >
-          <Pencil className="size-3" />
+          <Pencil className="size-2.5" />
         </button>
       )}
+    </div>
+  );
+}
 
-      <div className="mb-4 flex items-center gap-2">
-        <Icon className="size-4 text-attune-signal/60" />
-        <p className="font-kinetic text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
-          {label}
-        </p>
+function ModuleCard({
+  mod,
+  index,
+  locked,
+}: {
+  mod: (typeof MODULES)[number];
+  index: number;
+  locked: boolean;
+}) {
+  const Icon = mod.icon;
+
+  return (
+    <motion.div
+      custom={index + 8}
+      variants={snap}
+      className="group relative overflow-hidden rounded-lg border border-white/[0.05] bg-white/[0.02] transition-all duration-300 hover:border-attune-signal/30 hover:bg-white/[0.04]"
+    >
+      <div className="pointer-events-none absolute -right-4 -top-4 font-kinetic text-[80px] font-black leading-none text-white/[0.02] transition-all duration-300 group-hover:text-attune-signal/[0.06]">
+        {mod.id}
       </div>
 
-      <AnimatePresence mode="wait">
-        {editing ? (
-          <motion.div
-            key="edit"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15 }}
-          >
-            <textarea
-              ref={inputRef}
-              value={draft}
-              onChange={(e) => setDraft(e.target.value)}
-              onKeyDown={handleKeyDown}
-              onBlur={save}
-              rows={2}
-              spellCheck={false}
-              className="font-kinetic w-full resize-none border-0 border-b-2 border-attune-signal/30 bg-transparent text-sm font-semibold leading-relaxed text-white focus:border-attune-signal focus:outline-none"
-            />
-            <div className="mt-3 flex items-center gap-2">
-              <button
-                onClick={save}
-                disabled={isPending}
-                className="flex items-center gap-1 rounded border border-attune-signal/30 bg-attune-signal/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-attune-signal transition-colors hover:bg-attune-signal hover:text-[#030303] disabled:opacity-40"
-              >
-                <Check className="size-2.5" />
-                {isPending ? "SAVING" : "SAVE"}
-              </button>
-              <button
-                onClick={cancel}
-                className="flex items-center gap-1 rounded border border-white/[0.06] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white/30 transition-colors hover:text-white/60"
-              >
-                <X className="size-2.5" />
-                ESC
-              </button>
+      <div className="relative flex h-full flex-col justify-between p-5">
+        <div>
+          <div className="mb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Icon className="size-4 text-attune-signal/50 transition-colors group-hover:text-attune-signal" />
+              <span className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-white/20">
+                {mod.id}
+              </span>
             </div>
-          </motion.div>
-        ) : (
-          <motion.p
-            key="display"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="font-kinetic cursor-pointer text-sm font-semibold leading-relaxed text-white/80"
-            onClick={() => setEditing(true)}
-          >
-            {value || "—"}
-          </motion.p>
-        )}
-      </AnimatePresence>
+            {locked && <Lock className="size-3 text-white/10" />}
+          </div>
+
+          <h3 className="font-kinetic text-sm font-bold uppercase tracking-wide text-white/80 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">
+            {mod.title}
+          </h3>
+          <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-white/20">
+            {mod.subtitle}
+          </p>
+        </div>
+
+        <div className="mt-4 flex items-center justify-between">
+          <div className="h-[2px] flex-1 rounded-full bg-white/[0.04]">
+            <div
+              className="h-full rounded-full bg-attune-signal/30 transition-all duration-300 group-hover:bg-attune-signal/60"
+              style={{ width: locked ? "0%" : "0%" }}
+            />
+          </div>
+          <ChevronRight className="ml-2 size-3.5 text-white/10 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-attune-signal/60" />
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -217,6 +326,8 @@ export function DashboardClient({
   goal: string;
 }) {
   const [booted, setBooted] = useState(false);
+  const currentModule = MODULES[1];
+  const executionRate = 0;
 
   return (
     <>
@@ -226,88 +337,229 @@ export function DashboardClient({
 
       {booted && (
         <div className="relative min-h-screen">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,240,255,0.04)_0%,transparent_50%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,240,255,0.03)_0%,transparent_50%)]" />
 
-          <main className="relative z-10 px-8 py-12">
-            {/* Header */}
-            <motion.div initial="hidden" animate="visible" className="mb-12">
-              <motion.p
-                custom={0}
-                variants={slamIn}
-                className="mb-2 font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-attune-signal/50"
-              >
-                Protocol Complete — Signal Active
-              </motion.p>
-              <motion.h1
-                custom={1}
-                variants={slamIn}
-                className="font-kinetic text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-5xl lg:text-6xl"
-              >
-                Welcome to the Arena,{" "}
-                <span className="text-attune-signal text-glow-signal">
-                  {firstName}.
-                </span>
-              </motion.h1>
+          {/* ══ TICKER BAR ══ */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="sticky top-0 z-20 flex items-center gap-6 overflow-hidden border-b border-white/[0.04] bg-[#030303]/90 px-6 py-2.5 backdrop-blur-md"
+          >
+            <div className="flex items-center gap-4 overflow-hidden whitespace-nowrap">
+              {[
+                { label: "OPERATOR", value: firstName.toUpperCase() },
+                { label: "DOMAIN", value: (domain || "UNSET").toUpperCase() },
+                { label: "STATUS", value: "ATTUNING", highlight: true },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-1.5">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/15">
+                    {item.label}:
+                  </span>
+                  <span
+                    className={`font-kinetic text-[10px] font-bold uppercase tracking-wider ${
+                      item.highlight
+                        ? "text-attune-signal"
+                        : "text-white/50"
+                    }`}
+                  >
+                    {item.value}
+                  </span>
+                  {i < 2 && (
+                    <span className="ml-2 text-white/8">//</span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="ml-auto flex items-center gap-1.5">
+              <div className="size-1.5 rounded-full bg-attune-signal animate-pulse" />
+              <span className="font-mono text-[9px] uppercase tracking-widest text-attune-signal/40">
+                LIVE
+              </span>
+            </div>
+          </motion.div>
+
+          <main className="relative z-10 p-6 lg:p-8">
+            {/* ══ TOP ROW: OBJECTIVE + CONSTRAINT ══ */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              className="mb-6 grid gap-4 lg:grid-cols-3"
+            >
+              {/* CURRENT OBJECTIVE — Hero Card */}
               <motion.div
-                custom={2}
-                variants={slamIn}
-                className="mt-4 h-[2px] w-16 bg-attune-signal"
-              />
+                custom={0}
+                variants={snap}
+                className="relative overflow-hidden rounded-lg border border-attune-signal/10 bg-attune-signal/[0.03] lg:col-span-2"
+              >
+                <div className="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-attune-signal/[0.04] blur-3xl" />
+                <div className="relative p-6 lg:p-8">
+                  <div className="mb-4 flex items-center gap-2">
+                    <Zap className="size-3.5 text-attune-signal" />
+                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-attune-signal/60">
+                      Current Objective
+                    </span>
+                  </div>
+
+                  <h2 className="font-kinetic text-2xl font-black uppercase tracking-tight text-white lg:text-3xl">
+                    {currentModule.id}: {currentModule.title}
+                  </h2>
+                  <p className="mt-1 font-mono text-xs uppercase tracking-wider text-white/30">
+                    {currentModule.subtitle}
+                  </p>
+
+                  {/* Progress bar */}
+                  <div className="mt-6">
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-white/20">
+                        Execution Rate
+                      </span>
+                      <span className="font-kinetic text-xs font-bold tabular-nums text-attune-signal">
+                        {executionRate}%
+                      </span>
+                    </div>
+                    <div className="h-2 overflow-hidden rounded-full bg-white/[0.04]">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${executionRate}%` }}
+                        transition={{ duration: 1.2, ease: EASE, delay: 0.3 }}
+                        className="h-full rounded-full bg-gradient-to-r from-attune-signal/80 to-attune-signal"
+                        style={{
+                          boxShadow: "0 0 12px rgba(0, 240, 255, 0.3)",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <motion.button
+                    custom={2}
+                    variants={snap}
+                    className="mt-6 inline-flex items-center gap-2.5 rounded-md border border-attune-signal/30 bg-attune-signal/10 px-6 py-3 font-kinetic text-sm font-bold uppercase tracking-wider text-attune-signal transition-all duration-200 hover:bg-attune-signal hover:text-[#030303] hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]"
+                  >
+                    <Zap className="size-4" />
+                    Deploy
+                  </motion.button>
+                </div>
+              </motion.div>
+
+              {/* CONSTRAINT — Warning Card */}
+              <motion.div
+                custom={1}
+                variants={snap}
+                className="relative overflow-hidden rounded-lg border border-red-500/10 bg-red-500/[0.03]"
+              >
+                <div className="pointer-events-none absolute -right-6 -top-6 size-24 rounded-full bg-red-500/[0.05] blur-3xl" />
+                <div className="relative flex h-full flex-col p-6">
+                  <div className="mb-3 flex items-center gap-2">
+                    <AlertTriangle className="size-3.5 text-red-400/70" />
+                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-red-400/50">
+                      Current Target
+                    </span>
+                  </div>
+
+                  <p className="font-kinetic flex-1 text-base font-bold leading-snug text-red-300/80 lg:text-lg">
+                    {constraint || "No constraint set"}
+                  </p>
+
+                  <div className="mt-4 flex items-center gap-2">
+                    <div className="h-[2px] flex-1 rounded-full bg-red-500/10">
+                      <div className="h-full w-full animate-pulse rounded-full bg-red-500/20" />
+                    </div>
+                    <span className="font-mono text-[8px] uppercase tracking-widest text-red-400/30">
+                      Unresolved
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
 
-            {/* Editable Cards */}
+            {/* ══ OPERATOR CONFIG ══ */}
             <motion.div
               initial="hidden"
               animate="visible"
-              className="grid gap-4 sm:grid-cols-3"
+              className="mb-8"
             >
-              <EditableCard
-                icon={Crosshair}
-                label="Domain"
-                value={domain}
-                field="domain"
-                index={3}
-              />
-              <EditableCard
-                icon={Lock}
-                label="Constraint"
-                value={constraint}
-                field="constraint"
-                index={4}
-              />
-              <EditableCard
-                icon={Target}
-                label="90-Day Win"
-                value={goal}
-                field="goal"
-                index={5}
-              />
+              <motion.div
+                custom={3}
+                variants={snap}
+                className="rounded-lg border border-white/[0.04] bg-white/[0.015] p-5"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-white/20">
+                    Operator Config
+                  </span>
+                  <span className="font-mono text-[8px] uppercase tracking-widest text-white/10">
+                    Editable
+                  </span>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <EditableField
+                    label="Domain"
+                    value={domain}
+                    field="domain"
+                  />
+                  <EditableField
+                    label="Bottleneck"
+                    value={constraint}
+                    field="constraint"
+                  />
+                  <EditableField
+                    label="90-Day Objective"
+                    value={goal}
+                    field="goal"
+                  />
+                </div>
+              </motion.div>
             </motion.div>
 
-            {/* Hint */}
-            <motion.p
-              custom={6}
-              variants={slamIn}
-              initial="hidden"
-              animate="visible"
-              className="mt-4 text-[10px] uppercase tracking-[0.15em] text-white/15"
-            >
-              Hover any card to recalibrate
-            </motion.p>
-
-            {/* CTA */}
-            <motion.div
-              custom={7}
-              variants={slamIn}
-              initial="hidden"
-              animate="visible"
-              className="mt-10"
-            >
-              <div className="inline-flex items-center gap-2 border border-attune-signal/10 bg-attune-signal/[0.04] px-5 py-3">
-                <Zap className="size-3.5 text-attune-signal" />
-                <span className="font-kinetic text-xs font-bold uppercase tracking-[0.15em] text-attune-signal/60">
-                  Modules loading soon...
+            {/* ══ THE ARSENAL — Module Grid ══ */}
+            <motion.div initial="hidden" animate="visible">
+              <motion.div
+                custom={5}
+                variants={snap}
+                className="mb-4 flex items-center justify-between"
+              >
+                <div className="flex items-center gap-2">
+                  <Crosshair className="size-3.5 text-attune-signal/40" />
+                  <span className="font-kinetic text-xs font-bold uppercase tracking-[0.15em] text-white/30">
+                    The Arsenal
+                  </span>
+                </div>
+                <span className="font-mono text-[9px] uppercase tracking-widest text-white/10">
+                  0 / {MODULES.length} Deployed
                 </span>
+              </motion.div>
+
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {MODULES.map((mod, i) => (
+                  <ModuleCard
+                    key={mod.id}
+                    mod={mod}
+                    index={i}
+                    locked={i > 1}
+                  />
+                ))}
+              </div>
+            </motion.div>
+
+            {/* ══ 90-DAY OBJECTIVE FOOTER ══ */}
+            <motion.div
+              custom={16}
+              variants={snap}
+              initial="hidden"
+              animate="visible"
+              className="mt-8 rounded-lg border border-white/[0.03] bg-white/[0.01] p-5"
+            >
+              <div className="flex items-start gap-3">
+                <Target className="mt-0.5 size-4 shrink-0 text-attune-signal/30" />
+                <div>
+                  <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-white/15">
+                    90-Day Win
+                  </p>
+                  <p className="font-kinetic mt-1 text-sm font-bold leading-relaxed text-white/50">
+                    {goal || "No objective set"}
+                  </p>
+                </div>
               </div>
             </motion.div>
           </main>
