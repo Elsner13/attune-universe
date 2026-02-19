@@ -13,7 +13,6 @@ import {
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ConstellationCanvas } from "./ConstellationCanvas";
 
 const stagger: Variants = {
   hidden: {},
@@ -44,23 +43,9 @@ export function Hero() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section className="noise-overlay relative min-h-screen overflow-hidden bg-attune-void">
+    <section className="relative min-h-screen overflow-hidden bg-attune-void">
       {/* ═══════════════════════════════════════════
-          LAYER 1 — Background: Constellation Field
-          ═══════════════════════════════════════════ */}
-      <ConstellationCanvas />
-
-      {/* Cinematic radial vignette */}
-      <div
-        className="pointer-events-none fixed inset-0 z-1"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 60% at 50% 40%, transparent 0%, #050505 100%)",
-        }}
-      />
-
-      {/* ═══════════════════════════════════════════
-          LAYER 2 — Foreground: The Authority Bento
+          Foreground: The Authority Bento
           ═══════════════════════════════════════════ */}
       <motion.div
         variants={stagger}

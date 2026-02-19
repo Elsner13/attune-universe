@@ -153,7 +153,7 @@ export function ConstellationCanvas() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 2.5, ease: "easeOut" }}
-      className="pointer-events-none fixed inset-0 z-0"
+      className="pointer-events-none absolute inset-0 z-0"
     />
   );
 }
