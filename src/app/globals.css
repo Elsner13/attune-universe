@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@config "../../../tailwind.config.ts";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -13,14 +15,20 @@
   --font-display: var(--font-playfair-display);
 
   /* Attune Universe palette */
-  --color-attune-void: #030303;
-  --color-attune-starlight: #EDEDED;
+  --color-attune-void: #050505;
+  --color-attune-starlight: #F8FAFC;
   --color-attune-green: #00FF94;
   --color-attune-purple: #7C3AED;
   --color-attune-obsidian: #121212;
 
-  /* Pulse-slow animation */
+  /* Animations */
   --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-scale-in: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-in-left: slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  /* Shadcn component tokens */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -64,24 +72,24 @@
 :root {
   --radius: 0.625rem;
 
-  /* Core palette */
-  --background: #030303;
-  --foreground: #EDEDED;
+  /* Core palette — "Gary Vee x Eden" */
+  --background: #050505;
+  --foreground: #F8FAFC;
   --surface: #121212;
 
   /* Primary: Ecological Green */
   --primary: #00FF94;
-  --primary-foreground: #030303;
+  --primary-foreground: #050505;
 
   /* Secondary: Cosmic Purple */
   --secondary: #7C3AED;
-  --secondary-foreground: #EDEDED;
+  --secondary-foreground: #F8FAFC;
 
   /* Card / Popover: Obsidian surface */
   --card: #121212;
-  --card-foreground: #EDEDED;
+  --card-foreground: #F8FAFC;
   --popover: #121212;
-  --popover-foreground: #EDEDED;
+  --popover-foreground: #F8FAFC;
 
   /* Muted */
   --muted: #1A1A1A;
@@ -89,65 +97,129 @@
 
   /* Accent */
   --accent: #1A1A1A;
-  --accent-foreground: #EDEDED;
+  --accent-foreground: #F8FAFC;
 
   /* Destructive */
   --destructive: #FF4444;
 
   /* Border / Input / Ring */
-  --border: rgba(237, 237, 237, 0.08);
-  --input: rgba(237, 237, 237, 0.12);
+  --border: rgba(248, 250, 252, 0.08);
+  --input: rgba(248, 250, 252, 0.12);
   --ring: #00FF94;
 
   /* Charts */
   --chart-1: #00FF94;
   --chart-2: #7C3AED;
-  --chart-3: #EDEDED;
+  --chart-3: #F8FAFC;
   --chart-4: #FF4444;
   --chart-5: #FFB800;
 
   /* Sidebar */
   --sidebar: #0A0A0A;
-  --sidebar-foreground: #EDEDED;
+  --sidebar-foreground: #F8FAFC;
   --sidebar-primary: #00FF94;
-  --sidebar-primary-foreground: #030303;
+  --sidebar-primary-foreground: #050505;
   --sidebar-accent: #1A1A1A;
-  --sidebar-accent-foreground: #EDEDED;
-  --sidebar-border: rgba(237, 237, 237, 0.08);
+  --sidebar-accent-foreground: #F8FAFC;
+  --sidebar-border: rgba(248, 250, 252, 0.08);
   --sidebar-ring: #00FF94;
 }
 
-/* Dark mode is the default — light override kept minimal */
 .dark {
-  /* Already dark by default, same values */
+  /* Dark is the default — no overrides needed */
 }
+
+/* ─── Base Layer ─── */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-attune-void text-attune-starlight font-sans;
   }
 }
+
+/* ─── Keyframes ─── */
 
 @keyframes pulse-slow {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.85; }
 }
 
-/* ─── Glass Utility ─── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Utility Layer ─── */
+
 @layer utilities {
+
+  /* Authority headline style — Playfair Display, massive, tight */
+  .text-authority {
+    font-family: var(--font-playfair-display), Georgia, serif;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  /* Glassmorphism surface */
   .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-}
 
-/* ─── Noise Overlay ─── */
-@layer utilities {
+  /* Ecological Green glow */
+  .glow-green {
+    box-shadow:
+      0 0 20px rgba(0, 255, 148, 0.35),
+      0 0 60px rgba(0, 255, 148, 0.15);
+  }
+
+  .glow-green-lg {
+    box-shadow:
+      0 0 30px rgba(0, 255, 148, 0.45),
+      0 0 80px rgba(0, 255, 148, 0.2);
+  }
+
+  /* Cosmic Purple glow */
+  .glow-purple {
+    box-shadow:
+      0 0 20px rgba(124, 58, 237, 0.35),
+      0 0 60px rgba(124, 58, 237, 0.15);
+  }
+
+  /* Text glow variants */
+  .text-glow-green {
+    text-shadow:
+      0 0 10px rgba(0, 255, 148, 0.5),
+      0 0 40px rgba(0, 255, 148, 0.2);
+  }
+
+  .text-glow-purple {
+    text-shadow:
+      0 0 10px rgba(124, 58, 237, 0.5),
+      0 0 40px rgba(124, 58, 237, 0.2);
+  }
+
+  /* Noise overlay — subtle film grain texture */
   .noise-overlay::before {
     content: "";
     position: fixed;
