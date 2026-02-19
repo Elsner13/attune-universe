@@ -19,7 +19,7 @@ import Link from "next/link";
 
 /* ─── Electric Green — sister-brand accent ─── */
 const ELECTRIC = "#00FFB2";
-const CHECKOUT_URL = "https://buy.stripe.com/3cIcN5fCp1CR0qz2RBefC04";
+const CHECKOUT_URL = "https://buy.stripe.com/test_7sY7sL75T2GV3CLgIrefC00";
 
 const stagger: Variants = {
   hidden: {},
