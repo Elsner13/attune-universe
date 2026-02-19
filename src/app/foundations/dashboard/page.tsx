@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { DashboardClient } from "./DashboardClient";
+
+export const metadata: Metadata = {
+  title: "War Room",
+};
 
 export default async function DashboardPage() {
   const { userId } = await auth();

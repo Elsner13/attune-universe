@@ -33,7 +33,10 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  title: "Attune | Master Any Skill via Ecological Psychology",
+  title: {
+    default: "ATTUNE — Stop Learning. Start Mastering.",
+    template: "%s | ATTUNE",
+  },
   description:
     "Master any domain faster than traditional methods. Use the Attune OS and Ecological Psychology to align your perception and action for elite performance.",
   keywords: [
@@ -45,11 +48,11 @@ export const metadata: Metadata = {
   ],
   metadataBase: new URL("https://attune.world"),
   openGraph: {
-    title: "Attune | Master Any Skill via Ecological Psychology",
+    title: "ATTUNE — Stop Learning. Start Mastering.",
     description:
       "Master any domain faster than traditional methods. Use the Attune OS and Ecological Psychology to align your perception and action for elite performance.",
     url: "https://attune.world",
-    siteName: "Attune",
+    siteName: "ATTUNE",
     images: [
       {
         url: "/og-image.png",
@@ -63,7 +66,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Attune | Master Any Skill via Ecological Psychology",
+    title: "ATTUNE — Stop Learning. Start Mastering.",
     description:
       "Master any domain faster than traditional methods. Use the Attune OS and Ecological Psychology to align your perception and action for elite performance.",
     images: ["/og-image.png"],
