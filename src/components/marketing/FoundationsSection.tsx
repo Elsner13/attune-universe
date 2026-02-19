@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { ArrowRight, BookOpen, Target, Eye, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
 const pillars = [
   {
@@ -48,10 +50,11 @@ export function FoundationsSection() {
     offset: ["start end", "end start"],
   });
 
-  const headlineY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+  const headlineYRaw = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const headlineY = useSpring(headlineYRaw, SPRING);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[250vh] bg-attune-void">
+    <section ref={sectionRef} className="contain-paint relative min-h-[250vh] bg-attune-void">
       {/* ═══════════════════════════════════════
           Sticky "THE LINEAGE." watermark headline
           ═══════════════════════════════════════ */}
@@ -59,7 +62,7 @@ export function FoundationsSection() {
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
             style={{ y: headlineY }}
-            className="text-authority select-none text-[clamp(3.5rem,14vw,16rem)] font-black leading-[0.85] text-attune-starlight/4"
+            className="text-authority select-none text-[clamp(3.5rem,14vw,16rem)] font-black leading-[0.85] text-attune-starlight/4 will-change-transform"
           >
             THE
             <br />

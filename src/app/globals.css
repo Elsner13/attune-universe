@@ -234,6 +234,11 @@ html.lenis body {
       0 0 40px rgba(124, 58, 237, 0.2);
   }
 
+  /* Paint containment — isolates compositing layers to prevent layout shifts */
+  .contain-paint {
+    contain: paint;
+  }
+
   /* Noise overlay — subtle film grain texture */
   .noise-overlay::before {
     content: "";

@@ -14,9 +14,26 @@ interface Star {
 
 const STAR_COUNT = 90;
 const CONNECTION_DISTANCE = 160;
+const CONNECTION_DIST_SQ = CONNECTION_DISTANCE * CONNECTION_DISTANCE;
 const SPEED = 0.12;
 const PARALLAX_STRENGTH = 30;
 const PULSE_SPEED = 0.0008;
+const MOUSE_LERP = 0.05;
+
+function createGlowSprite(): HTMLCanvasElement {
+  const size = 64;
+  const sprite = document.createElement("canvas");
+  sprite.width = size;
+  sprite.height = size;
+  const ctx = sprite.getContext("2d")!;
+  const half = size / 2;
+  const grad = ctx.createRadialGradient(half, half, 0, half, half, half);
+  grad.addColorStop(0, "rgba(0, 255, 148, 0.25)");
+  grad.addColorStop(1, "rgba(0, 255, 148, 0)");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, size, size);
+  return sprite;
+}
 
 export function ConstellationCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -24,6 +41,7 @@ export function ConstellationCanvas() {
   const rafRef = useRef<number>(0);
   const mouseRef = useRef({ x: 0, y: 0 });
   const smoothMouseRef = useRef({ x: 0, y: 0 });
+  const glowRef = useRef<HTMLCanvasElement | null>(null);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     mouseRef.current = {
@@ -35,8 +53,11 @@ export function ConstellationCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
+
+    if (!glowRef.current) glowRef.current = createGlowSprite();
+    const glow = glowRef.current;
 
     let dpr = window.devicePixelRatio || 1;
 
@@ -46,12 +67,11 @@ export function ConstellationCanvas() {
       canvas!.height = window.innerHeight * dpr;
       canvas!.style.width = `${window.innerWidth}px`;
       canvas!.style.height = `${window.innerHeight}px`;
-      ctx!.scale(dpr, dpr);
     }
 
     resize();
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     const w = () => canvas!.width / dpr;
     const h = () => canvas!.height / dpr;
@@ -74,65 +94,69 @@ export function ConstellationCanvas() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, cw, ch);
 
-      const lerp = 0.05;
       smoothMouseRef.current.x +=
-        (mouseRef.current.x - smoothMouseRef.current.x) * lerp;
+        (mouseRef.current.x - smoothMouseRef.current.x) * MOUSE_LERP;
       smoothMouseRef.current.y +=
-        (mouseRef.current.y - smoothMouseRef.current.y) * lerp;
+        (mouseRef.current.y - smoothMouseRef.current.y) * MOUSE_LERP;
 
       const offsetX = smoothMouseRef.current.x * PARALLAX_STRENGTH;
       const offsetY = smoothMouseRef.current.y * PARALLAX_STRENGTH;
 
       const stars = starsRef.current;
+      const len = stars.length;
       const pulse = Math.sin(time * PULSE_SPEED) * 0.5 + 0.5;
 
-      for (const star of stars) {
-        star.x += star.vx;
-        star.y += star.vy;
-        if (star.x < 0) star.x = cw;
-        if (star.x > cw) star.x = 0;
-        if (star.y < 0) star.y = ch;
-        if (star.y > ch) star.y = 0;
+      for (let i = 0; i < len; i++) {
+        const s = stars[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        if (s.x < 0) s.x = cw;
+        else if (s.x > cw) s.x = 0;
+        if (s.y < 0) s.y = ch;
+        else if (s.y > ch) s.y = 0;
       }
 
-      for (let i = 0; i < stars.length; i++) {
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < len; i++) {
         const ax = stars[i].x + offsetX;
         const ay = stars[i].y + offsetY;
-        for (let j = i + 1; j < stars.length; j++) {
-          const bx = stars[j].x + offsetX;
-          const by = stars[j].y + offsetY;
-          const dx = ax - bx;
-          const dy = ay - by;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECTION_DISTANCE) {
+        for (let j = i + 1; j < len; j++) {
+          const dx = ax - (stars[j].x + offsetX);
+          const dy = ay - (stars[j].y + offsetY);
+          const distSq = dx * dx + dy * dy;
+          if (distSq < CONNECTION_DIST_SQ) {
+            const dist = Math.sqrt(distSq);
             const base = (1 - dist / CONNECTION_DISTANCE) * 0.12;
             const alpha = base * (0.6 + pulse * 0.4);
             ctx.beginPath();
             ctx.moveTo(ax, ay);
-            ctx.lineTo(bx, by);
+            ctx.lineTo(stars[j].x + offsetX, stars[j].y + offsetY);
             ctx.strokeStyle = `rgba(0, 255, 148, ${alpha})`;
-            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       }
 
-      for (const star of stars) {
-        const sx = star.x + offsetX;
-        const sy = star.y + offsetY;
+      for (let i = 0; i < len; i++) {
+        const s = stars[i];
+        const sx = s.x + offsetX;
+        const sy = s.y + offsetY;
 
         ctx.beginPath();
-        ctx.arc(sx, sy, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 255, 148, ${star.opacity})`;
+        ctx.arc(sx, sy, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 255, 148, ${s.opacity})`;
         ctx.fill();
 
-        ctx.beginPath();
-        ctx.arc(sx, sy, star.radius * 4, 0, Math.PI * 2);
-        const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, star.radius * 4);
-        glow.addColorStop(0, `rgba(0, 255, 148, ${star.opacity * 0.25})`);
-        glow.addColorStop(1, "rgba(0, 255, 148, 0)");
-        ctx.fillStyle = glow;
-        ctx.fill();
+        const glowDiam = s.radius * 8;
+        ctx.globalAlpha = s.opacity;
+        ctx.drawImage(
+          glow,
+          sx - glowDiam * 0.5,
+          sy - glowDiam * 0.5,
+          glowDiam,
+          glowDiam
+        );
+        ctx.globalAlpha = 1;
       }
 
       rafRef.current = requestAnimationFrame(draw);

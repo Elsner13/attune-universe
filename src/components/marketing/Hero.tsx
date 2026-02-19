@@ -43,10 +43,7 @@ export function Hero() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-attune-void">
-      {/* ═══════════════════════════════════════════
-          Foreground: The Authority Bento
-          ═══════════════════════════════════════════ */}
+    <section className="contain-paint relative min-h-screen overflow-hidden bg-attune-void">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -64,7 +61,7 @@ export function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="text-authority max-w-4xl text-6xl font-black text-attune-starlight sm:text-7xl md:text-8xl lg:text-9xl"
+            className="text-authority max-w-4xl text-6xl font-black text-attune-starlight will-change-transform sm:text-7xl md:text-8xl lg:text-9xl"
           >
             MASTER ANY
             <br />
