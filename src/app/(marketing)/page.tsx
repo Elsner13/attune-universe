@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Hero } from "@/components/marketing/Hero";
 import { FoundationsSection } from "@/components/marketing/FoundationsSection";
+import { AttractorSection } from "@/components/marketing/AttractorSection";
 import { ConstellationCanvas } from "@/components/marketing/ConstellationCanvas";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -35,6 +36,7 @@ export default function UniverseHub() {
         <Hero />
       </div>
       <FoundationsSection />
+      <AttractorSection />
     </main>
   );
 }
