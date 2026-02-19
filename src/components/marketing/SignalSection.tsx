@@ -62,11 +62,11 @@ function SignalStrengthBar({ strength }: { strength: number }) {
         <div
           key={i}
           className={`h-2.5 w-1 rounded-[1px] transition-colors ${
-            i < filled ? "bg-attune-green/80" : "bg-white/6"
+            i < filled ? "bg-attune-yellow/80" : "bg-white/6"
           }`}
         />
       ))}
-      <span className="ml-1.5 font-mono text-[10px] tabular-nums text-attune-green/70">
+      <span className="ml-1.5 font-mono text-[10px] tabular-nums text-attune-yellow/70">
         {strength}%
       </span>
     </div>
@@ -107,7 +107,7 @@ export function SignalSection() {
           </motion.h2>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-attune-green/15 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-attune-yellow/15 to-transparent" />
       </div>
 
       {/* Scrolling content layer */}
@@ -121,7 +121,7 @@ export function SignalSection() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mb-16 text-center"
           >
-            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-attune-green/20 bg-attune-green/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-attune-green">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-attune-yellow/20 bg-attune-yellow/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-attune-yellow">
               <Radio className="size-3" />
               Newsletter — Signal/Noise
             </span>
@@ -142,7 +142,7 @@ export function SignalSection() {
                   className="signal-glitch text-authority mb-6 text-5xl font-black text-attune-starlight sm:text-6xl lg:text-7xl"
                 >
                   THE{" "}
-                  <span className="text-attune-green text-glow-green">
+                  <span className="text-attune-yellow text-glow-yellow">
                     SIGNAL.
                   </span>
                 </h3>
@@ -154,12 +154,12 @@ export function SignalSection() {
                   things.
                 </p>
 
-                <div className="mb-8 h-px w-full bg-linear-to-r from-attune-green/20 to-transparent" />
+                <div className="mb-8 h-px w-full bg-linear-to-r from-attune-yellow/20 to-transparent" />
 
                 {/* Stats */}
                 <div className="flex gap-8">
                   <div>
-                    <div className="font-mono text-2xl font-bold tabular-nums text-attune-green">
+                    <div className="font-mono text-2xl font-bold tabular-nums text-attune-yellow">
                       500+
                     </div>
                     <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-attune-starlight/30">
@@ -167,7 +167,7 @@ export function SignalSection() {
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-2xl font-bold tabular-nums text-attune-green">
+                    <div className="font-mono text-2xl font-bold tabular-nums text-attune-yellow">
                       Weekly
                     </div>
                     <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-attune-starlight/30">
@@ -175,7 +175,7 @@ export function SignalSection() {
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-2xl font-bold tabular-nums text-attune-green">
+                    <div className="font-mono text-2xl font-bold tabular-nums text-attune-yellow">
                       Free
                     </div>
                     <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-attune-starlight/30">
@@ -195,11 +195,11 @@ export function SignalSection() {
                 transition={{ duration: 0.6 }}
                 className="mb-4 flex items-center justify-between"
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-attune-green/40">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-attune-yellow/40">
                   ── Intelligence Briefs ──
                 </span>
-                <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-attune-green/30">
-                  <span className="size-1.5 animate-pulse rounded-full bg-attune-green" />
+                <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-attune-yellow/30">
+                  <span className="size-1.5 animate-pulse rounded-full bg-attune-yellow" />
                   Live Feed
                 </span>
               </motion.div>
@@ -219,14 +219,14 @@ export function SignalSection() {
                       delay: i * 0.08,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="group block overflow-hidden rounded-xl border border-white/5 bg-[#080808]/80 p-5 backdrop-blur-sm transition-all duration-400 hover:border-attune-green/20 hover:bg-[#0a0a0a]"
+                    className="group block overflow-hidden rounded-xl border border-white/5 bg-[#080808]/80 p-5 backdrop-blur-sm transition-all duration-400 hover:border-attune-yellow/20 hover:bg-[#0a0a0a]"
                   >
                     {/* Top row: timestamp + tag */}
                     <div className="mb-3 flex items-center justify-between">
                       <span className="font-mono text-[10px] tabular-nums tracking-wider text-attune-starlight/20">
                         {brief.timestamp}
                       </span>
-                      <span className="rounded-sm bg-attune-green/8 px-2 py-0.5 font-mono text-[8px] font-medium uppercase tracking-[0.2em] text-attune-green/60">
+                      <span className="rounded-sm bg-attune-yellow/8 px-2 py-0.5 font-mono text-[8px] font-medium uppercase tracking-[0.2em] text-attune-yellow/60">
                         {brief.tag}
                       </span>
                     </div>
@@ -255,22 +255,22 @@ export function SignalSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-green/15 bg-[#080808]/90 backdrop-blur-xl"
+            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-yellow/15 bg-[#080808]/90 backdrop-blur-xl"
           >
-            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-green/6 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-green/4 blur-[80px]" />
+            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-yellow/6 blur-[80px]" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-yellow/4 blur-[80px]" />
 
             {/* Top accent line */}
-            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-green/40 to-transparent" />
+            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-yellow/40 to-transparent" />
 
             <div className="relative px-8 py-10 sm:px-12 sm:py-14">
               {/* Icon + heading */}
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex size-12 items-center justify-center rounded-2xl border border-attune-green/20 bg-attune-green/8">
-                  <Zap className="size-6 text-attune-green" />
+                <div className="flex size-12 items-center justify-center rounded-2xl border border-attune-yellow/20 bg-attune-yellow/8">
+                  <Zap className="size-6 text-attune-yellow" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-green/70">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-yellow/70">
                     Free Newsletter
                   </span>
                   <h4 className="font-display text-2xl font-bold text-attune-starlight sm:text-3xl">
@@ -282,7 +282,7 @@ export function SignalSection() {
               <p className="mb-4 text-authority text-xl font-bold leading-tight text-attune-starlight/90 sm:text-2xl">
                 DECODE THE UNIVERSE.
                 <br />
-                <span className="text-attune-green text-glow-green">
+                <span className="text-attune-yellow text-glow-yellow">
                   JOIN 500+ MASTERING THE SIGNAL.
                 </span>
               </p>
@@ -297,10 +297,10 @@ export function SignalSection() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-attune-green/20 bg-attune-green/5 px-5 py-4"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-attune-yellow/20 bg-attune-yellow/5 px-5 py-4"
                 >
-                  <Zap className="size-4 text-attune-green" />
-                  <span className="font-mono text-sm text-attune-green">
+                  <Zap className="size-4 text-attune-yellow" />
+                  <span className="font-mono text-sm text-attune-yellow">
                     Signal locked in. Check your inbox.
                   </span>
                 </motion.div>
@@ -321,13 +321,13 @@ export function SignalSection() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="border-attune-green/10 bg-attune-void/60 pl-9 font-mono text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-green/30 focus-visible:ring-attune-green/20"
+                        className="border-attune-yellow/10 bg-attune-void/60 pl-9 font-mono text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-yellow/30 focus-visible:ring-attune-yellow/20"
                       />
                     </div>
                     <Button
                       type="submit"
                       size="lg"
-                      className="group/cta gap-2 border border-attune-green/30 bg-attune-green px-8 text-base font-bold text-attune-void shadow-[0_0_30px_rgba(0,255,148,0.35)] transition-all duration-300 hover:bg-attune-green/90 hover:shadow-[0_0_60px_rgba(0,255,148,0.5)]"
+                      className="group/cta gap-2 border border-attune-yellow/30 bg-attune-yellow px-8 text-base font-bold text-attune-void shadow-[0_0_30px_rgba(255,214,0,0.35)] transition-all duration-300 hover:bg-attune-yellow/90 hover:shadow-[0_0_60px_rgba(255,214,0,0.5)]"
                     >
                       SUBSCRIBE TO SIGNAL
                       <ArrowRight className="size-5 transition-transform duration-300 group-hover/cta:translate-x-0.5" />
@@ -341,7 +341,7 @@ export function SignalSection() {
             </div>
 
             {/* Bottom accent line */}
-            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-green/20 to-transparent" />
+            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-yellow/20 to-transparent" />
           </motion.div>
         </div>
       </div>

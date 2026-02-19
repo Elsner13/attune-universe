@@ -20,6 +20,7 @@
   --color-attune-green: #00FF94;
   --color-attune-purple: #7C3AED;
   --color-attune-blue: #00B4FF;
+  --color-attune-yellow: #FFD600;
   --color-attune-obsidian: #121212;
 
   /* Animations */
@@ -241,11 +242,30 @@ html.lenis body {
       0 0 80px rgba(124, 58, 237, 0.2);
   }
 
+  /* Cosmic Yellow glow */
+  .glow-yellow {
+    box-shadow:
+      0 0 20px rgba(255, 214, 0, 0.35),
+      0 0 60px rgba(255, 214, 0, 0.15);
+  }
+
+  .glow-yellow-lg {
+    box-shadow:
+      0 0 30px rgba(255, 214, 0, 0.45),
+      0 0 80px rgba(255, 214, 0, 0.2);
+  }
+
   /* Text glow variants */
   .text-glow-green {
     text-shadow:
       0 0 10px rgba(0, 255, 148, 0.5),
       0 0 40px rgba(0, 255, 148, 0.2);
+  }
+
+  .text-glow-yellow {
+    text-shadow:
+      0 0 10px rgba(255, 214, 0, 0.5),
+      0 0 40px rgba(255, 214, 0, 0.2);
   }
 
   .text-glow-purple {
@@ -307,9 +327,9 @@ html.lenis body {
     background: linear-gradient(
       to bottom,
       transparent,
-      rgba(0, 255, 148, 0.04) 40%,
-      rgba(0, 255, 148, 0.06) 50%,
-      rgba(0, 255, 148, 0.04) 60%,
+      rgba(255, 214, 0, 0.04) 40%,
+      rgba(255, 214, 0, 0.06) 50%,
+      rgba(255, 214, 0, 0.04) 60%,
       transparent
     );
     animation: scanline 6s linear infinite;
@@ -333,7 +353,7 @@ html.lenis body {
 
   .signal-glitch:hover::before {
     opacity: 0.8;
-    color: #00FF94;
+    color: #FFD600;
     animation: glitch-shift 0.3s steps(2, jump-none) infinite;
     mix-blend-mode: screen;
   }

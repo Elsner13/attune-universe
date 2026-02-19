@@ -12,6 +12,7 @@ const config: Config = {
         "attune-purple": "#7C3AED",
         "attune-starlight": "#F8FAFC",
         "attune-blue": "#00B4FF",
+        "attune-yellow": "#FFD600",
         "attune-obsidian": "#121212",
       },
       fontFamily: {
