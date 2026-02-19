@@ -43,7 +43,7 @@ function useCountdown(targetDate: Date) {
   return remaining;
 }
 
-const COHORT_START = new Date("2026-04-01T00:00:00");
+const COHORT_START = new Date("2026-03-02T00:00:00");
 
 export function AttractorSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -107,11 +107,11 @@ export function AttractorSection() {
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
             style={{ y: headlineY }}
-            className="text-authority select-none text-center text-[clamp(3.5rem,14vw,16rem)] font-black leading-[0.85] text-attune-starlight/3 will-change-transform"
+            className="text-authority select-none text-right text-[clamp(3.5rem,14vw,16rem)] font-black leading-[0.85] text-attune-starlight/3 will-change-transform"
           >
             THE
             <br />
-            ATTRACTOR.
+            PRACTICE.
           </motion.h2>
         </div>
 
@@ -196,7 +196,7 @@ export function AttractorSection() {
               <div className="mt-4 flex items-center justify-center gap-2">
                 <div className="size-1.5 animate-pulse rounded-full bg-attune-purple" />
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-attune-purple/60">
-                  12 Seats Remaining
+                  23 Seats Remaining
                 </span>
               </div>
             </div>
