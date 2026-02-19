@@ -17,7 +17,7 @@ const NAV_ITEMS = [
   { href: "/foundations/modules", label: "Modules", icon: Layers },
 ];
 
-export function CommandCenter({ domain }: { domain?: string }) {
+export function CommandCenter() {
   const pathname = usePathname();
 
   return (
@@ -81,25 +81,6 @@ export function CommandCenter({ domain }: { domain?: string }) {
         />
       </div>
 
-      {/* Domain ticker */}
-      {domain && domain !== "Unset" && (
-        <div className="overflow-hidden border-t border-white/[0.04] bg-white/[0.02]">
-          <div
-            className="flex whitespace-nowrap py-2"
-            style={{ animation: "ticker-scroll 20s linear infinite" }}
-          >
-            {Array.from({ length: 8 }).map((_, i) => (
-              <span
-                key={i}
-                className="mx-4 font-mono text-[9px] font-bold uppercase tracking-[0.25em] text-attune-signal/30"
-              >
-                Current Domain: {domain}
-                <span className="mx-4 text-white/10">///</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
     </aside>
   );
 }
