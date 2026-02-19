@@ -17,10 +17,11 @@ const fadeUp = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 40, scale: 0.97 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: { delay: 1.2 + i * 0.12, duration: 0.7, ease: "easeOut" as const },
   }),
 };
@@ -42,7 +43,7 @@ export function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="font-display text-center text-6xl font-black leading-[0.95] tracking-tight text-attune-starlight sm:text-7xl md:text-8xl lg:text-9xl"
+          className="font-display text-center text-7xl font-black leading-[0.92] tracking-tighter text-attune-starlight md:text-8xl lg:text-9xl"
         >
           MASTER ANY&nbsp;SKILL.
         </motion.h1>
@@ -53,12 +54,12 @@ export function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mt-6 text-center font-mono text-xs tracking-[0.3em] text-attune-starlight/50 uppercase sm:text-sm"
+          className="mt-6 text-center font-mono text-xs uppercase tracking-[0.2em] text-attune-green sm:text-sm"
         >
           The Ecological Approach to High Performance.
         </motion.p>
 
-        {/* ─── Authority Bento ─── */}
+        {/* ─── Authority Bento Grid ─── */}
         <div className="mt-20 grid w-full gap-4 md:grid-cols-3">
           {/* Card 1 — Manifesto Video */}
           <motion.div
@@ -88,10 +89,10 @@ export function Hero() {
             variants={cardVariants}
             initial="hidden"
             animate="visible"
-            className="glass flex flex-col items-center justify-between gap-6 rounded-2xl p-8"
+            className="glass flex flex-col items-center justify-between gap-6 rounded-2xl border-attune-green/10 p-8"
           >
             <div className="flex flex-col items-center gap-2 text-center">
-              <span className="font-mono text-[10px] tracking-[0.25em] text-attune-green/60 uppercase">
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-green/60">
                 Self-paced Course
               </span>
               <h3 className="font-display text-2xl font-bold text-attune-starlight">
@@ -105,7 +106,7 @@ export function Hero() {
               <span className="font-mono text-lg font-semibold text-attune-starlight/70">
                 $97
               </span>
-              <Button className="w-full bg-attune-green font-semibold text-attune-void hover:bg-attune-green/90">
+              <Button className="relative w-full bg-attune-green font-semibold text-attune-void shadow-[0_0_20px_rgba(0,255,148,0.3)] transition-shadow hover:bg-attune-green/90 hover:shadow-[0_0_30px_rgba(0,255,148,0.45)]">
                 START HERE
               </Button>
             </div>
@@ -120,7 +121,7 @@ export function Hero() {
             className="glass flex flex-col items-center justify-between gap-6 rounded-2xl p-8"
           >
             <div className="flex flex-col items-center gap-2 text-center">
-              <span className="font-mono text-[10px] tracking-[0.25em] text-attune-purple/80 uppercase">
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-purple/80">
                 Coming Soon
               </span>
               <h3 className="font-display text-2xl font-bold text-attune-starlight">

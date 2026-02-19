@@ -139,21 +139,18 @@
 /* ─── Glass Utility ─── */
 @layer utilities {
   .glass {
-    background: rgba(18, 18, 18, 0.6);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(237, 237, 237, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
 /* ─── Noise Overlay ─── */
 @layer utilities {
-  .noise-overlay {
-    position: relative;
-  }
   .noise-overlay::before {
     content: "";
-    position: absolute;
+    position: fixed;
     inset: 0;
     z-index: 50;
     pointer-events: none;
