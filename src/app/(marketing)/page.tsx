@@ -31,14 +31,6 @@ export default function UniverseHub() {
         <ConstellationCanvas />
       </motion.div>
 
-      <div
-        className="pointer-events-none fixed inset-0 z-1"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 60% at 50% 40%, transparent 0%, #050505 100%)",
-        }}
-      />
-
       <div ref={heroRef}>
         <Hero />
       </div>
