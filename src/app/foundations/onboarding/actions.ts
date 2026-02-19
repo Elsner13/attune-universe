@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 
 export async function saveOnboardingData(data: {
   domain: string;
-  bottleneck: string;
-  hoursPerWeek: string;
+  constraint: string;
+  goal: string;
 }) {
   const { userId } = await auth();
   if (!userId) throw new Error("Not authenticated");
@@ -22,8 +22,8 @@ export async function saveOnboardingData(data: {
       onboardingDate: new Date().toISOString(),
       foundations: {
         domain: data.domain,
-        bottleneck: data.bottleneck,
-        hoursPerWeek: data.hoursPerWeek,
+        constraint: data.constraint,
+        goal: data.goal,
       },
     },
   });

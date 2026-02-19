@@ -1,172 +1,89 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Crosshair,
-  Lock,
-  Flame,
-  ArrowRight,
-  ArrowLeft,
-  Check,
-} from "lucide-react";
+import { ArrowRight, Zap, SkipForward } from "lucide-react";
 import { saveOnboardingData } from "./actions";
 
 const STEPS = [
   {
-    id: "vision",
-    title: "The Vision",
-    subtitle: "What is your primary domain of mastery?",
-    description:
-      "Select the arena where you intend to forge signal from noise.",
-    icon: Crosshair,
-    options: [
-      {
-        value: "coding",
-        label: "Coding & Engineering",
-        desc: "Software, systems, architecture",
-      },
-      {
-        value: "sport",
-        label: "Sport & Performance",
-        desc: "Athletic training, competition",
-      },
-      {
-        value: "business",
-        label: "Business & Strategy",
-        desc: "Entrepreneurship, leadership, growth",
-      },
-      {
-        value: "creative",
-        label: "Creative & Art",
-        desc: "Music, writing, design, film",
-      },
-      {
-        value: "science",
-        label: "Science & Research",
-        desc: "Discovery, experimentation, analysis",
-      },
-      {
-        value: "other",
-        label: "Other Domain",
-        desc: "A unique path of mastery",
-      },
-    ],
+    id: "domain",
+    label: "01",
+    tag: "THE ARENA.",
+    header: "WHERE ARE YOU COMPETING?",
+    subtext: "Define your domain of mastery (e.g., Coding, BJJ, Business).",
+    type: "input" as const,
+    placeholder: "Type your domain...",
   },
   {
     id: "constraint",
-    title: "The Constraint",
-    subtitle: "What is your biggest bottleneck right now?",
-    description:
-      "Identify the constraint that limits your rate of adaptation.",
-    icon: Lock,
-    options: [
-      {
-        value: "focus",
-        label: "Focus & Attention",
-        desc: "Scattered energy, inability to go deep",
-      },
-      {
-        value: "consistency",
-        label: "Consistency",
-        desc: "Starting strong, fading fast",
-      },
-      {
-        value: "feedback",
-        label: "Feedback Loops",
-        desc: "No clear signal on what's working",
-      },
-      {
-        value: "overwhelm",
-        label: "Information Overwhelm",
-        desc: "Too many inputs, not enough processing",
-      },
-      {
-        value: "direction",
-        label: "Direction & Clarity",
-        desc: "Unsure what to focus on next",
-      },
-      {
-        value: "execution",
-        label: "Execution Gap",
-        desc: "Know what to do, can't make it happen",
-      },
-    ],
+    label: "02",
+    tag: "THE BOTTLENECK.",
+    header: "WHAT IS HOLDING YOU BACK?",
+    subtext: "Identify the primary constraint in your perception-action cycle.",
+    type: "textarea" as const,
+    placeholder: "Be honest. Be specific...",
   },
   {
-    id: "commitment",
-    title: "The Commitment",
-    subtitle: "How many hours per week are you coupling action to perception?",
-    description:
-      "Honest assessment of current deliberate practice bandwidth.",
-    icon: Flame,
-    options: [
-      {
-        value: "1-3",
-        label: "1 — 3 hours",
-        desc: "Building the foundation",
-      },
-      {
-        value: "4-7",
-        label: "4 — 7 hours",
-        desc: "Consistent engagement",
-      },
-      {
-        value: "8-14",
-        label: "8 — 14 hours",
-        desc: "Serious commitment",
-      },
-      {
-        value: "15-25",
-        label: "15 — 25 hours",
-        desc: "Deep immersion",
-      },
-      {
-        value: "25+",
-        label: "25+ hours",
-        desc: "Full integration",
-      },
-    ],
+    id: "goal",
+    label: "03",
+    tag: "THE WIN.",
+    header: "WHAT DOES MASTERY LOOK LIKE IN 90 DAYS?",
+    subtext: "Be specific. Be direct.",
+    type: "textarea" as const,
+    placeholder: "Describe your 90-day outcome...",
   },
 ] as const;
 
 type StepId = (typeof STEPS)[number]["id"];
 
-const slideVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 80 : -80,
-    opacity: 0,
-    filter: "blur(4px)",
-  }),
-  center: {
-    x: 0,
+const slamIn = {
+  hidden: { y: 60, opacity: 0, filter: "blur(8px)" },
+  visible: (i: number) => ({
+    y: 0,
     opacity: 1,
     filter: "blur(0px)",
-  },
-  exit: (direction: number) => ({
-    x: direction < 0 ? 80 : -80,
-    opacity: 0,
-    filter: "blur(4px)",
+    transition: {
+      delay: i * 0.08,
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
   }),
+  exit: { y: -40, opacity: 0, filter: "blur(4px)", transition: { duration: 0.25 } },
+};
+
+const lineExpand = {
+  hidden: { scaleX: 0 },
+  visible: {
+    scaleX: 1,
+    transition: { delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  },
 };
 
 export default function OnboardingPage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [direction, setDirection] = useState(0);
   const [answers, setAnswers] = useState<Record<StepId, string>>({
-    vision: "",
+    domain: "",
     constraint: "",
-    commitment: "",
+    goal: "",
   });
   const [isPending, startTransition] = useTransition();
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   const step = STEPS[currentStep];
-  const StepIcon = step.icon;
-  const canProceed = answers[step.id] !== "";
+  const canProceed = answers[step.id].trim().length > 0;
   const isLastStep = currentStep === STEPS.length - 1;
 
-  function selectOption(value: string) {
-    setAnswers((prev) => ({ ...prev, [step.id]: value }));
+  useEffect(() => {
+    const timer = setTimeout(() => inputRef.current?.focus(), 400);
+    return () => clearTimeout(timer);
+  }, [currentStep]);
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "Enter" && !e.shiftKey && canProceed) {
+      e.preventDefault();
+      next();
+    }
   }
 
   function next() {
@@ -174,174 +91,193 @@ export default function OnboardingPage() {
     if (isLastStep) {
       startTransition(async () => {
         await saveOnboardingData({
-          domain: answers.vision,
-          bottleneck: answers.constraint,
-          hoursPerWeek: answers.commitment,
+          domain: answers.domain,
+          constraint: answers.constraint,
+          goal: answers.goal,
         });
       });
       return;
     }
-    setDirection(1);
     setCurrentStep((s) => s + 1);
   }
 
-  function back() {
-    if (currentStep === 0) return;
-    setDirection(-1);
-    setCurrentStep((s) => s - 1);
+  function skip() {
+    startTransition(async () => {
+      await saveOnboardingData({
+        domain: answers.domain || "Unset",
+        constraint: answers.constraint || "Unset",
+        goal: answers.goal || "Unset",
+      });
+    });
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#030303]">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(0,240,255,0.04)_0%,transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(0,240,255,0.03)_0%,transparent_50%)]" />
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#030303]">
+      {/* Background pulse */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.05)_0%,transparent_60%)]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-xl px-6">
-        {/* Progress */}
+      {/* Skip button */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        onClick={skip}
+        disabled={isPending}
+        className="absolute right-6 top-6 z-20 flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.15em] text-white/20 transition-colors hover:text-white/40 disabled:opacity-30"
+      >
+        Skip Protocol
+        <SkipForward className="size-3" />
+      </motion.button>
+
+      {/* Progress bar */}
+      <div className="absolute left-0 right-0 top-0 z-10 h-[2px] bg-white/[0.04]">
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8 flex items-center justify-center gap-3"
-        >
-          {STEPS.map((s, i) => (
-            <div key={s.id} className="flex items-center gap-3">
-              <div
-                className={`flex size-8 items-center justify-center rounded-full border text-xs font-medium transition-all duration-500 ${
-                  i < currentStep
-                    ? "border-attune-signal/40 bg-attune-signal/20 text-attune-signal"
-                    : i === currentStep
-                      ? "border-attune-signal/30 bg-attune-signal/10 text-attune-signal"
-                      : "border-white/[0.06] bg-white/[0.02] text-attune-starlight/20"
-                }`}
-              >
-                {i < currentStep ? <Check className="size-3.5" /> : i + 1}
-              </div>
-              {i < STEPS.length - 1 && (
-                <div
-                  className={`h-px w-8 transition-colors duration-500 ${
-                    i < currentStep
-                      ? "bg-attune-signal/30"
-                      : "bg-white/[0.06]"
-                  }`}
-                />
-              )}
-            </div>
-          ))}
-        </motion.div>
+          className="h-full bg-attune-signal"
+          initial={{ width: "0%" }}
+          animate={{ width: `${((currentStep + 1) / STEPS.length) * 100}%` }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </div>
 
-        {/* Step content */}
-        <div className="relative min-h-[480px]">
-          <AnimatePresence mode="wait" custom={direction}>
+      {/* Step counter */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2 }}
+        className="absolute left-6 top-6 z-10 font-mono text-xs text-white/20"
+      >
+        {String(currentStep + 1).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
+      </motion.div>
+
+      {/* Main content */}
+      <div className="relative z-10 flex flex-1 items-center justify-center px-6 py-20">
+        <div className="w-full max-w-3xl">
+          <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
+              initial="hidden"
+              animate="visible"
               exit="exit"
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 backdrop-blur-sm">
-                {/* Header */}
-                <div className="mb-8 flex flex-col items-center text-center">
-                  <div className="mb-5 flex size-14 items-center justify-center rounded-full border border-attune-signal/20 bg-attune-signal/[0.06]">
-                    <StepIcon className="size-6 text-attune-signal" />
-                  </div>
-                  <p className="mb-1 text-xs font-medium uppercase tracking-[0.2em] text-attune-signal/60">
-                    Step {currentStep + 1} of {STEPS.length}
-                  </p>
-                  <h2 className="text-authority mb-1 text-2xl text-attune-starlight">
-                    {step.title}
-                  </h2>
-                  <p className="text-sm text-attune-starlight/50">
-                    {step.subtitle}
-                  </p>
-                  <p className="mt-2 text-xs text-attune-starlight/30">
-                    {step.description}
-                  </p>
-                </div>
+              {/* Tag */}
+              <motion.p
+                custom={0}
+                variants={slamIn}
+                className="font-kinetic mb-3 text-xs font-bold uppercase tracking-[0.3em] text-attune-signal"
+              >
+                {step.tag}
+              </motion.p>
 
-                {/* Options */}
-                <div className="space-y-2">
-                  {step.options.map((option) => {
-                    const isSelected = answers[step.id] === option.value;
-                    return (
-                      <motion.button
-                        key={option.value}
-                        onClick={() => selectOption(option.value)}
-                        whileTap={{ scale: 0.98 }}
-                        className={`group flex w-full items-start gap-4 rounded-xl border px-4 py-3.5 text-left transition-all duration-200 ${
-                          isSelected
-                            ? "border-attune-signal/30 bg-attune-signal/[0.08]"
-                            : "border-white/[0.04] bg-white/[0.02] hover:border-white/[0.08] hover:bg-white/[0.04]"
-                        }`}
-                      >
-                        <div
-                          className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border transition-all duration-200 ${
-                            isSelected
-                              ? "border-attune-signal/50 bg-attune-signal/20"
-                              : "border-white/[0.1] bg-transparent"
-                          }`}
-                        >
-                          {isSelected && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="size-2 rounded-full bg-attune-signal"
-                            />
-                          )}
-                        </div>
-                        <div>
-                          <p
-                            className={`text-sm font-medium transition-colors ${
-                              isSelected
-                                ? "text-attune-signal"
-                                : "text-attune-starlight/80"
-                            }`}
-                          >
-                            {option.label}
-                          </p>
-                          <p className="text-xs text-attune-starlight/30">
-                            {option.desc}
-                          </p>
-                        </div>
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              </div>
+              {/* Header — massive, slamming in */}
+              <motion.h1
+                custom={1}
+                variants={slamIn}
+                className="font-kinetic mb-4 text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+              >
+                {step.header}
+              </motion.h1>
 
-              {/* Navigation */}
-              <div className="mt-6 flex items-center justify-between">
-                <button
-                  onClick={back}
-                  disabled={currentStep === 0}
-                  className="flex items-center gap-1.5 text-sm text-attune-starlight/30 transition-colors hover:text-attune-starlight/60 disabled:invisible"
-                >
-                  <ArrowLeft className="size-3.5" />
-                  Back
-                </button>
+              {/* Cyan line */}
+              <motion.div
+                variants={lineExpand}
+                className="mb-6 h-[2px] w-24 origin-left bg-attune-signal"
+              />
 
+              {/* Subtext */}
+              <motion.p
+                custom={2}
+                variants={slamIn}
+                className="mb-10 max-w-xl text-base leading-relaxed text-white/40 sm:text-lg"
+              >
+                {step.subtext}
+              </motion.p>
+
+              {/* Input */}
+              <motion.div custom={3} variants={slamIn}>
+                {step.type === "input" ? (
+                  <input
+                    ref={inputRef as React.RefObject<HTMLInputElement>}
+                    type="text"
+                    value={answers[step.id]}
+                    onChange={(e) =>
+                      setAnswers((prev) => ({
+                        ...prev,
+                        [step.id]: e.target.value,
+                      }))
+                    }
+                    onKeyDown={handleKeyDown}
+                    placeholder={step.placeholder}
+                    autoComplete="off"
+                    spellCheck={false}
+                    className="font-kinetic w-full border-0 border-b-2 border-white/[0.08] bg-transparent py-4 text-2xl font-bold text-white placeholder:text-white/15 transition-colors duration-300 focus:border-attune-signal focus:outline-none sm:text-3xl md:text-4xl"
+                    style={{
+                      animation: answers[step.id]
+                        ? "none"
+                        : "signal-pulse 3s ease-in-out infinite",
+                    }}
+                  />
+                ) : (
+                  <textarea
+                    ref={inputRef as React.RefObject<HTMLTextAreaElement>}
+                    value={answers[step.id]}
+                    onChange={(e) =>
+                      setAnswers((prev) => ({
+                        ...prev,
+                        [step.id]: e.target.value,
+                      }))
+                    }
+                    onKeyDown={handleKeyDown}
+                    placeholder={step.placeholder}
+                    rows={3}
+                    spellCheck={false}
+                    className="font-kinetic w-full resize-none border-0 border-b-2 border-white/[0.08] bg-transparent py-4 text-xl font-bold text-white placeholder:text-white/15 transition-colors duration-300 focus:border-attune-signal focus:outline-none sm:text-2xl md:text-3xl"
+                    style={{
+                      animation: answers[step.id]
+                        ? "none"
+                        : "signal-pulse 3s ease-in-out infinite",
+                    }}
+                  />
+                )}
+              </motion.div>
+
+              {/* CTA */}
+              <motion.div custom={4} variants={slamIn} className="mt-10 flex items-center gap-6">
                 <button
                   onClick={next}
                   disabled={!canProceed || isPending}
-                  className="flex items-center gap-2 rounded-lg border border-attune-signal/30 bg-attune-signal/10 px-6 py-2.5 text-sm font-medium text-attune-signal transition-all duration-300 hover:border-attune-signal/50 hover:bg-attune-signal/20 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:shadow-none"
+                  className="group flex items-center gap-3 rounded-none border-2 border-attune-signal bg-attune-signal/10 px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-attune-signal transition-all duration-300 hover:bg-attune-signal hover:text-[#030303] hover:shadow-[0_0_60px_rgba(0,240,255,0.4)] disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:bg-attune-signal/10 disabled:hover:text-attune-signal disabled:hover:shadow-none"
                 >
                   {isPending ? (
-                    "Saving..."
+                    "INITIALIZING..."
                   ) : isLastStep ? (
                     <>
-                      Enter the Arena
-                      <Flame className="size-3.5" />
+                      INITIALIZE
+                      <Zap className="size-4 transition-transform group-hover:scale-110" />
                     </>
                   ) : (
                     <>
-                      Continue
-                      <ArrowRight className="size-3.5" />
+                      NEXT
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                     </>
                   )}
                 </button>
-              </div>
+
+                <span className="hidden text-xs text-white/15 sm:block">
+                  Press <kbd className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-white/30">Enter</kbd> to continue
+                </span>
+              </motion.div>
+
+              {/* Back */}
+              {currentStep > 0 && (
+                <motion.button
+                  custom={5}
+                  variants={slamIn}
+                  onClick={() => setCurrentStep((s) => s - 1)}
+                  className="mt-6 text-xs font-medium uppercase tracking-[0.15em] text-white/20 transition-colors hover:text-white/40"
+                >
+                  &larr; Back
+                </motion.button>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
