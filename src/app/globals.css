@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --font-geist-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-geist-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --font-playfair-display: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+
+  --color-attune-void: #050505;
+  --color-attune-obsidian: #121212;
+  --color-attune-starlight: #f8fafc;
+  --color-attune-green: #00ff94;
+  --color-attune-blue: #00b4ff;
+  --color-attune-purple: #7c3aed;
+  --color-attune-yellow: #ffd600;
+  --color-attune-signal: #00f0ff;
+
+  --radius: 0.625rem;
+}
+
+:root {
+  --background: #050505;
+  --foreground: #f8fafc;
+  --surface: #121212;
+  --primary: #00ff94;
+  --primary-foreground: #050505;
+  --secondary: #7c3aed;
+  --secondary-foreground: #f8fafc;
+  --card: #121212;
+  --card-foreground: #f8fafc;
+  --muted: #1a1a1a;
+  --muted-foreground: #a1a1a1;
+  --accent: #1a1a1a;
+  --accent-foreground: #f8fafc;
+  --destructive: #ff4444;
+  --border: #f8fafc14;
+  --input: #f8fafc1f;
+  --ring: #00ff94;
+}
+
+body {
+  font-family: var(--font-geist-sans);
+  color: #f8fafc;
+  background-color: #050505;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@utility glass {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility glass-strong {
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@utility glow-signal {
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.2), 0 0 64px rgba(0, 240, 255, 0.08);
+}
+
+@utility glow-signal-lg {
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.3), 0 0 80px rgba(0, 240, 255, 0.12);
+}
+
+@utility glow-green {
+  box-shadow: 0 0 24px rgba(0, 255, 148, 0.2), 0 0 64px rgba(0, 255, 148, 0.08);
+}
+
+@utility text-glow-signal {
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.4), 0 0 48px rgba(0, 240, 255, 0.15);
+}
+
+@utility text-glow-green {
+  text-shadow: 0 0 12px rgba(0, 255, 148, 0.4), 0 0 48px rgba(0, 255, 148, 0.15);
+}
+
+@utility text-authority {
+  font-family: var(--font-playfair-display), Georgia, serif;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
