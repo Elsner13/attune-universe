@@ -69,7 +69,7 @@ export function AttractorSection() {
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
             style={{ y: headlineY }}
-            className="text-authority select-none text-right text-[clamp(3.5rem,14vw,16rem)] font-black leading-[0.85] text-attune-starlight/3 will-change-transform"
+            className="text-authority select-none text-left text-[clamp(3.5rem,14vw,16rem)] font-black leading-[0.85] text-attune-starlight/3 will-change-transform"
           >
             THE
             <br />
