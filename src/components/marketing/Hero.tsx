@@ -119,7 +119,7 @@ export function Hero() {
             {/* Video footer */}
             <div className="flex items-center justify-between px-5 py-4 sm:px-6">
               <div>
-                <h3 className="font-display text-lg font-bold text-attune-starlight sm:text-xl">
+                <h3 className="font-display text-lg font-bold tracking-tight text-attune-starlight sm:text-xl">
                   The Attune Manifesto
                 </h3>
                 <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-attune-starlight/40">
@@ -144,8 +144,7 @@ export function Hero() {
             variants={scaleIn}
             className="group relative overflow-hidden rounded-2xl border border-attune-green/20 bg-[#0c0c0c] p-6 transition-all duration-500 hover:border-attune-green/40 sm:p-7 md:col-span-5 glow-green"
           >
-            {/* Active glow accent */}
-            <div className="pointer-events-none absolute -right-12 -top-12 size-40 rounded-full bg-attune-green/[0.07] blur-3xl" />
+            <div className="pointer-events-none absolute -right-12 -top-12 size-40 rounded-full bg-attune-green blur-3xl opacity-20" />
 
             <div className="relative flex h-full flex-col justify-between gap-5">
               <div>
@@ -157,7 +156,7 @@ export function Hero() {
                     Start Here
                   </span>
                 </div>
-                <h3 className="font-display text-2xl font-bold text-attune-starlight">
+                <h3 className="font-display text-2xl font-bold tracking-tight text-attune-starlight">
                   Foundations
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-attune-starlight/40">
@@ -190,7 +189,7 @@ export function Hero() {
             variants={scaleIn}
             className="group relative overflow-hidden rounded-2xl border border-attune-purple/15 bg-[#0c0c0c] p-6 transition-all duration-500 hover:border-attune-purple/30 sm:p-7 md:col-span-5"
           >
-            <div className="pointer-events-none absolute -left-12 -top-12 size-40 rounded-full bg-attune-purple/[0.07] blur-3xl" />
+            <div className="pointer-events-none absolute -left-12 -top-12 size-40 rounded-full bg-attune-purple blur-3xl opacity-20" />
 
             <div className="relative flex h-full flex-col justify-between gap-5">
               <div>
@@ -202,7 +201,7 @@ export function Hero() {
                     Live Cohort
                   </span>
                 </div>
-                <h3 className="font-display text-2xl font-bold text-attune-starlight">
+                <h3 className="font-display text-2xl font-bold tracking-tight text-attune-starlight">
                   Attractor Universe
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-attune-starlight/40">
@@ -245,7 +244,7 @@ export function Hero() {
                 </div>
                 <div>
                   <div className="flex items-center gap-3">
-                    <h3 className="font-display text-xl font-bold text-attune-starlight sm:text-2xl">
+                    <h3 className="font-display text-xl font-bold tracking-tight text-attune-starlight sm:text-2xl">
                       Attune&nbsp;OS
                     </h3>
                     <span className="rounded-full border border-attune-starlight/10 bg-attune-starlight/5 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-attune-starlight/50">

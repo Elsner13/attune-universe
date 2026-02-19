@@ -222,62 +222,62 @@ html.lenis body {
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  /* Ecological Green glow */
+  /* Ecological Green glow — consistent blur-3xl / opacity-20 aesthetic */
   .glow-green {
     box-shadow:
-      0 0 20px rgba(0, 255, 148, 0.35),
-      0 0 60px rgba(0, 255, 148, 0.15);
+      0 0 24px rgba(0, 255, 148, 0.20),
+      0 0 64px rgba(0, 255, 148, 0.08);
   }
 
   .glow-green-lg {
     box-shadow:
-      0 0 30px rgba(0, 255, 148, 0.45),
-      0 0 80px rgba(0, 255, 148, 0.2);
+      0 0 40px rgba(0, 255, 148, 0.20),
+      0 0 80px rgba(0, 255, 148, 0.08);
   }
 
   /* Cosmic Purple glow */
   .glow-purple {
     box-shadow:
-      0 0 20px rgba(124, 58, 237, 0.35),
-      0 0 60px rgba(124, 58, 237, 0.15);
+      0 0 24px rgba(124, 58, 237, 0.20),
+      0 0 64px rgba(124, 58, 237, 0.08);
   }
 
   .glow-purple-lg {
     box-shadow:
-      0 0 30px rgba(124, 58, 237, 0.45),
-      0 0 80px rgba(124, 58, 237, 0.2);
+      0 0 40px rgba(124, 58, 237, 0.20),
+      0 0 80px rgba(124, 58, 237, 0.08);
   }
 
   /* Cosmic Yellow glow */
   .glow-yellow {
     box-shadow:
-      0 0 20px rgba(255, 214, 0, 0.35),
-      0 0 60px rgba(255, 214, 0, 0.15);
+      0 0 24px rgba(255, 214, 0, 0.20),
+      0 0 64px rgba(255, 214, 0, 0.08);
   }
 
   .glow-yellow-lg {
     box-shadow:
-      0 0 30px rgba(255, 214, 0, 0.45),
-      0 0 80px rgba(255, 214, 0, 0.2);
+      0 0 40px rgba(255, 214, 0, 0.20),
+      0 0 80px rgba(255, 214, 0, 0.08);
   }
 
-  /* Text glow variants */
+  /* Text glow variants — premium, consistent */
   .text-glow-green {
     text-shadow:
-      0 0 10px rgba(0, 255, 148, 0.5),
-      0 0 40px rgba(0, 255, 148, 0.2);
+      0 0 12px rgba(0, 255, 148, 0.4),
+      0 0 48px rgba(0, 255, 148, 0.15);
   }
 
   .text-glow-yellow {
     text-shadow:
-      0 0 10px rgba(255, 214, 0, 0.5),
-      0 0 40px rgba(255, 214, 0, 0.2);
+      0 0 12px rgba(255, 214, 0, 0.4),
+      0 0 48px rgba(255, 214, 0, 0.15);
   }
 
   .text-glow-purple {
     text-shadow:
-      0 0 10px rgba(124, 58, 237, 0.5),
-      0 0 40px rgba(124, 58, 237, 0.2);
+      0 0 12px rgba(124, 58, 237, 0.4),
+      0 0 48px rgba(124, 58, 237, 0.15);
   }
 
   /* Paint containment — isolates compositing layers to prevent layout shifts */
@@ -285,25 +285,31 @@ html.lenis body {
     contain: paint;
   }
 
+  /* GPU layer promotion for smooth scroll performance */
+  .gpu-layer {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
   /* OS CTA button glow */
   .os-cta-glow {
     box-shadow:
-      0 0 20px rgba(0, 180, 255, 0.3),
-      0 0 60px rgba(0, 180, 255, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      0 0 24px rgba(0, 180, 255, 0.20),
+      0 0 64px rgba(0, 180, 255, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.10);
   }
 
   /* Cosmic Blue glow */
   .glow-blue {
     box-shadow:
-      0 0 20px rgba(0, 180, 255, 0.35),
-      0 0 60px rgba(0, 180, 255, 0.15);
+      0 0 24px rgba(0, 180, 255, 0.20),
+      0 0 64px rgba(0, 180, 255, 0.08);
   }
 
   .text-glow-blue {
     text-shadow:
-      0 0 10px rgba(0, 180, 255, 0.5),
-      0 0 40px rgba(0, 180, 255, 0.2);
+      0 0 12px rgba(0, 180, 255, 0.4),
+      0 0 48px rgba(0, 180, 255, 0.15);
   }
 
   /* CRT scanline — GPU-accelerated vertical sweep */

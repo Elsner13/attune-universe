@@ -62,10 +62,14 @@ export function AttractorSection() {
       ref={sectionRef}
       className="relative min-h-[280vh]"
     >
+      {/* Section atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-[30%] h-[50%] w-[70%] -translate-x-1/2 rounded-full bg-attune-purple blur-3xl opacity-[0.02]" />
+      </div>
       {/* ═══════════════════════════════════════
           Sticky "THE ATTRACTOR." watermark + Orb
           ═══════════════════════════════════════ */}
-      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden">
+      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden will-change-transform">
         {/* Watermark headline */}
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
@@ -204,9 +208,8 @@ export function AttractorSection() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="glow-purple relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-purple/25 bg-[#0c0c0c]"
           >
-            {/* Glow aura */}
-            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-purple/10 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-20 -right-20 size-60 rounded-full bg-attune-purple/6 blur-[80px]" />
+            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-purple blur-3xl opacity-20" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 size-60 rounded-full bg-attune-purple blur-3xl opacity-20" />
 
             {/* Top accent line */}
             <div className="h-px w-full bg-linear-to-r from-transparent via-attune-purple/50 to-transparent" />
@@ -221,7 +224,7 @@ export function AttractorSection() {
                   <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-purple">
                     The Apex Experience
                   </span>
-                  <h4 className="font-display text-2xl font-bold text-attune-starlight sm:text-3xl">
+                  <h4 className="font-display text-2xl font-bold tracking-tight text-attune-starlight sm:text-3xl">
                     Attractor Universe
                   </h4>
                 </div>

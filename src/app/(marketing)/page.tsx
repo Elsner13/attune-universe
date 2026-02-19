@@ -13,6 +13,47 @@ import { CommandCenter } from "@/components/marketing/CommandCenter";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 200,
+    damping: 50,
+    restDelta: 0.001,
+  });
+
+  return (
+    <motion.div
+      className="fixed left-0 right-0 top-0 z-60 h-[2px] origin-left bg-attune-green shadow-[0_0_8px_rgba(0,255,148,0.5)]"
+      style={{ scaleX }}
+    />
+  );
+}
+
+function ScrollBackdrop() {
+  const { scrollYProgress } = useScroll();
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 0.10, 0.25, 0.42, 0.58, 0.75, 0.90, 1.0],
+    [
+      "#050505",
+      "#040907",
+      "#070410",
+      "#040710",
+      "#0a0904",
+      "#050605",
+      "#050505",
+      "#050505",
+    ]
+  );
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed inset-0"
+      style={{ backgroundColor, zIndex: -1 }}
+    />
+  );
+}
+
 export default function UniverseHub() {
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -29,9 +70,11 @@ export default function UniverseHub() {
 
   return (
     <>
+      <ScrollProgress />
+      <ScrollBackdrop />
       <CommandCenter />
 
-      <main className="noise-overlay relative md:pl-14">
+      <main className="noise-overlay relative lg:pl-14">
         <motion.div
           className="pointer-events-none fixed inset-0 z-0 will-change-transform"
           style={{ scale: warpScale, opacity: warpOpacity }}
@@ -47,6 +90,9 @@ export default function UniverseHub() {
         <AttuneOSSection />
         <SignalSection />
         <CosmicFooter />
+
+        {/* Mobile dock spacer */}
+        <div className="h-20 lg:hidden" />
       </main>
     </>
   );

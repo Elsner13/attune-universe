@@ -104,7 +104,7 @@ export function CosmicFooter() {
                   A
                 </span>
               </div>
-              <span className="font-display text-xl font-bold tracking-tight text-attune-starlight">
+              <span className="font-display text-xl font-bold tracking-tighter text-attune-starlight">
                 ATTUNE
               </span>
             </div>
@@ -193,9 +193,8 @@ export function CosmicFooter() {
           className="mx-auto max-w-3xl px-6 pb-24 sm:px-10 lg:px-16"
         >
           <div className="relative overflow-hidden rounded-2xl border border-attune-green/25 bg-[#060606] glow-green">
-            {/* Ambient glow blobs */}
-            <div className="pointer-events-none absolute -left-16 -top-16 size-48 rounded-full bg-attune-green/6 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-16 -right-16 size-36 rounded-full bg-attune-green/4 blur-[60px]" />
+            <div className="pointer-events-none absolute -left-16 -top-16 size-48 rounded-full bg-attune-green blur-3xl opacity-20" />
+            <div className="pointer-events-none absolute -bottom-16 -right-16 size-36 rounded-full bg-attune-green blur-3xl opacity-20" />
 
             {/* Top accent */}
             <div className="h-px w-full bg-linear-to-r from-transparent via-attune-green/40 to-transparent" />

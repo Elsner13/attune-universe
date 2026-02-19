@@ -55,10 +55,14 @@ export function FoundationsSection() {
 
   return (
     <section id="foundations" ref={sectionRef} className="relative min-h-[250vh]">
+      {/* Section atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-[30%] h-[50%] w-[70%] -translate-x-1/2 rounded-full bg-attune-green blur-3xl opacity-[0.015]" />
+      </div>
       {/* ═══════════════════════════════════════
           Sticky "THE LINEAGE." watermark headline
           ═══════════════════════════════════════ */}
-      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden">
+      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden will-change-transform">
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
             style={{ y: headlineY }}
@@ -120,7 +124,7 @@ export function FoundationsSection() {
                 }}
                 className="group relative overflow-hidden rounded-2xl border border-white/6 bg-[#0a0a0a] p-8 transition-colors duration-500 hover:border-attune-green/15"
               >
-                <div className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-attune-green/3 blur-2xl transition-all duration-500 group-hover:bg-attune-green/6" />
+                <div className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-attune-green blur-3xl opacity-20 transition-opacity duration-500 group-hover:opacity-30" />
                 <div className="relative">
                   <div className="mb-4 flex items-center gap-3">
                     <div className="flex size-10 items-center justify-center rounded-xl bg-attune-green/8">
@@ -130,7 +134,7 @@ export function FoundationsSection() {
                       {pillar.year}
                     </span>
                   </div>
-                  <h4 className="mb-3 font-display text-xl font-bold text-attune-starlight">
+                  <h4 className="mb-3 font-display text-xl font-bold tracking-tight text-attune-starlight">
                     {pillar.title}
                   </h4>
                   <p className="text-sm leading-relaxed text-attune-starlight/40">
@@ -172,9 +176,8 @@ export function FoundationsSection() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="glow-green-lg relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-green/20 bg-[#0c0c0c]"
           >
-            {/* Glow aura */}
-            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-green/8 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-20 -right-20 size-60 rounded-full bg-attune-green/5 blur-[80px]" />
+            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-green blur-3xl opacity-20" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 size-60 rounded-full bg-attune-green blur-3xl opacity-20" />
 
             {/* Top accent line */}
             <div className="h-px w-full bg-linear-to-r from-transparent via-attune-green/40 to-transparent" />
@@ -189,7 +192,7 @@ export function FoundationsSection() {
                   <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-green">
                     The Foundation
                   </span>
-                  <h3 className="font-display text-2xl font-bold text-attune-starlight sm:text-3xl">
+                  <h3 className="font-display text-2xl font-bold tracking-tight text-attune-starlight sm:text-3xl">
                     Foundations Course
                   </h3>
                 </div>

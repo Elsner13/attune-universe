@@ -205,8 +205,7 @@ function FloatingOSMockup({ rotateX, rotateY }: { rotateX: MotionValue<number>; 
       }}
       className="relative w-full max-w-3xl will-change-transform"
     >
-      {/* Outer glow */}
-      <div className="pointer-events-none absolute -inset-4 rounded-3xl bg-attune-blue/4 blur-2xl" />
+      <div className="pointer-events-none absolute -inset-4 rounded-3xl bg-attune-blue blur-3xl opacity-20" />
 
       {/* Main mockup container */}
       <div className="relative overflow-hidden rounded-2xl border border-attune-blue/15 bg-[#080808] shadow-[0_0_80px_rgba(0,180,255,0.08)]">
@@ -346,10 +345,14 @@ export function AttuneOSSection() {
       onMouseLeave={handleMouseLeave}
       className="relative min-h-[280vh]"
     >
+      {/* Section atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-[30%] h-[50%] w-[70%] -translate-x-1/2 rounded-full bg-attune-blue blur-3xl opacity-[0.02]" />
+      </div>
       {/* ═══════════════════════════════════════
           Sticky "THE OS." watermark
           ═══════════════════════════════════════ */}
-      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden">
+      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden will-change-transform">
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
             style={{ y: headlineY }}
@@ -475,8 +478,8 @@ export function AttuneOSSection() {
           >
             {/* Border glow effect */}
             <div className="pointer-events-none absolute -inset-px rounded-3xl bg-linear-to-b from-attune-blue/20 via-transparent to-attune-blue/10 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-blue/6 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-blue/4 blur-[80px]" />
+            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-blue blur-3xl opacity-20" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-blue blur-3xl opacity-20" />
 
             {/* Top accent line */}
             <div className="h-px w-full bg-linear-to-r from-transparent via-attune-blue/40 to-transparent" />
@@ -491,7 +494,7 @@ export function AttuneOSSection() {
                   <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-blue/70">
                     Coming Soon
                   </span>
-                  <h4 className="font-display text-2xl font-bold text-attune-starlight sm:text-3xl">
+                  <h4 className="font-display text-2xl font-bold tracking-tight text-attune-starlight sm:text-3xl">
                     Attune OS
                   </h4>
                 </div>

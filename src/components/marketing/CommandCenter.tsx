@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Orbit, Library, Zap, Cpu, Radio, X, Menu } from "lucide-react";
+import { Orbit, Library, Zap, Cpu, Radio } from "lucide-react";
 import { useLenis } from "@/components/providers/SmoothScrollProvider";
 
 const NAV_ITEMS = [
@@ -144,25 +144,24 @@ function DockIcon({
     <button
       onClick={onClick}
       aria-label={item.tooltip}
-      className="group relative flex flex-1 flex-col items-center justify-center gap-1 py-2"
+      className="group relative flex flex-1 flex-col items-center justify-center gap-1.5 py-3"
     >
-      {/* Active pip */}
       <motion.span
-        className="absolute top-0 h-[2px] w-5 rounded-full bg-attune-green"
+        className="absolute top-0 h-[2px] w-6 rounded-full bg-attune-green shadow-[0_0_8px_rgba(0,255,148,0.4)]"
         initial={false}
         animate={{ opacity: isActive ? 1 : 0, scaleX: isActive ? 1 : 0 }}
         transition={{ duration: 0.25 }}
       />
 
       <Icon
-        className={`size-4 transition-colors duration-300 ${
+        className={`size-[18px] transition-all duration-300 ${
           isActive
             ? "text-attune-green drop-shadow-[0_0_6px_rgba(0,255,148,0.6)]"
             : "text-white/30 group-hover:text-white/60"
         }`}
       />
       <span
-        className={`font-mono text-[8px] tracking-wider transition-colors duration-300 ${
+        className={`font-mono text-[7px] tracking-wider transition-colors duration-300 ${
           isActive ? "text-attune-green/70" : "text-white/20"
         }`}
       >
@@ -172,90 +171,9 @@ function DockIcon({
   );
 }
 
-// Mobile drawer overlay
-function MobileDrawer({
-  open,
-  onClose,
-  activeId,
-  onNavigate,
-}: {
-  open: boolean;
-  onClose: () => void;
-  activeId: string;
-  onNavigate: (id: SectionId) => void;
-}) {
-  return (
-    <AnimatePresence>
-      {open && (
-        <>
-          {/* Scrim */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 z-41 bg-black/60 backdrop-blur-sm md:hidden"
-          />
-
-          {/* Drawer panel */}
-          <motion.nav
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ type: "spring", stiffness: 400, damping: 35 }}
-            className="fixed left-0 top-0 z-42 flex h-full w-56 flex-col border-r border-attune-green/10 bg-attune-void/95 backdrop-blur-md md:hidden"
-          >
-            <div className="flex items-center justify-between border-b border-white/5 px-4 py-4">
-              <span className="font-mono text-[10px] tracking-[0.3em] text-attune-green/60">
-                CMD_CENTER
-              </span>
-              <button onClick={onClose} aria-label="Close navigation">
-                <X className="size-4 text-white/40 hover:text-white/70" />
-              </button>
-            </div>
-
-            <div className="flex flex-col gap-1 p-3">
-              {NAV_ITEMS.map((item) => {
-                const Icon = item.icon;
-                const isActive = item.id === activeId;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      onNavigate(item.id);
-                      onClose();
-                    }}
-                    className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-left transition-all duration-200 ${
-                      isActive
-                        ? "bg-attune-green/8 text-attune-green"
-                        : "text-white/40 hover:bg-white/4 hover:text-white/70"
-                    }`}
-                  >
-                    <Icon
-                      className={`size-4 ${
-                        isActive
-                          ? "drop-shadow-[0_0_6px_rgba(0,255,148,0.6)]"
-                          : ""
-                      }`}
-                    />
-                    <span className="font-mono text-[11px] tracking-widest">
-                      {item.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </motion.nav>
-        </>
-      )}
-    </AnimatePresence>
-  );
-}
-
 export function CommandCenter() {
   const lenis = useLenis();
   const [powered, setPowered] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const bootTimer = useRef<ReturnType<typeof setTimeout>>(null);
 
   const sectionIds = NAV_ITEMS.map((n) => n.id);
@@ -288,7 +206,7 @@ export function CommandCenter() {
       initial={{ opacity: 0, x: -20 }}
       animate={powered ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-      className="fixed left-0 top-0 z-40 hidden h-screen w-14 flex-col items-center border-r border-attune-green/8 bg-attune-void/80 backdrop-blur-sm md:flex"
+        className="fixed left-0 top-0 z-40 hidden h-screen w-14 flex-col items-center border-r border-attune-green/8 bg-attune-void/80 backdrop-blur-sm lg:flex"
     >
       {/* Boot indicator */}
       <div className="flex h-14 w-full items-center justify-center border-b border-white/5">
@@ -320,13 +238,18 @@ export function CommandCenter() {
     </motion.nav>
   );
 
-  /* ─── Mobile bottom dock ─── */
+  /* ─── Mobile bottom dock — glass-morphism ─── */
   const dock = (
     <motion.nav
       initial={{ y: 60, opacity: 0 }}
       animate={powered ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className="fixed inset-x-0 bottom-0 z-40 flex border-t border-attune-green/8 bg-attune-void/90 backdrop-blur-md md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 flex border-t border-white/8 pb-[env(safe-area-inset-bottom)] lg:hidden"
+      style={{
+        background: "rgba(5, 5, 5, 0.55)",
+        backdropFilter: "blur(40px) saturate(180%)",
+        WebkitBackdropFilter: "blur(40px) saturate(180%)",
+      }}
     >
       {NAV_ITEMS.map((item) => (
         <DockIcon
@@ -339,34 +262,10 @@ export function CommandCenter() {
     </motion.nav>
   );
 
-  /* ─── Mobile hamburger (alternative: shown when you want a drawer instead of dock) ─── */
-  const hamburger = (
-    <motion.button
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={powered ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-      transition={{ duration: 0.4, delay: 0.3 }}
-      onClick={() => setDrawerOpen(true)}
-      aria-label="Open navigation"
-      className="fixed left-3 top-3 z-42 flex size-9 items-center justify-center rounded-md border border-attune-green/10 bg-attune-void/80 backdrop-blur-sm md:hidden"
-    >
-      <Menu className="size-4 text-attune-green/60" />
-    </motion.button>
-  );
-
   return (
     <>
-      {/* Desktop */}
       {sidebar}
-
-      {/* Mobile — bottom dock + hamburger drawer combo */}
       {dock}
-      {hamburger}
-      <MobileDrawer
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        activeId={activeId}
-        onNavigate={scrollTo}
-      />
     </>
   );
 }

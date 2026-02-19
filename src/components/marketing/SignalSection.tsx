@@ -98,9 +98,13 @@ export function SignalSection() {
       ref={sectionRef}
       className="relative min-h-[260vh]"
     >
+      {/* Section atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-[30%] h-[50%] w-[70%] -translate-x-1/2 rounded-full bg-attune-yellow blur-3xl opacity-[0.015]" />
+      </div>
 
       {/* Sticky "THE SIGNAL." watermark */}
-      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden">
+      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden will-change-transform">
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
             style={{ y: headlineY }}
@@ -262,8 +266,8 @@ export function SignalSection() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-yellow/15 bg-[#080808]"
           >
-            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-yellow/6 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-yellow/4 blur-[80px]" />
+            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-yellow blur-3xl opacity-20" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-yellow blur-3xl opacity-20" />
 
             {/* Top accent line */}
             <div className="h-px w-full bg-linear-to-r from-transparent via-attune-yellow/40 to-transparent" />
@@ -278,7 +282,7 @@ export function SignalSection() {
                   <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-yellow/70">
                     Free Newsletter
                   </span>
-                  <h4 className="font-display text-2xl font-bold text-attune-starlight sm:text-3xl">
+                  <h4 className="font-display text-2xl font-bold tracking-tight text-attune-starlight sm:text-3xl">
                     Signal/Noise
                   </h4>
                 </div>
