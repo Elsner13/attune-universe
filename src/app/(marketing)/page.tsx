@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Hero } from "@/components/marketing/Hero";
 import { FoundationsSection } from "@/components/marketing/FoundationsSection";
 import { AttractorSection } from "@/components/marketing/AttractorSection";
+import { AttuneOSSection } from "@/components/marketing/AttuneOSSection";
 import { ConstellationCanvas } from "@/components/marketing/ConstellationCanvas";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -37,6 +38,7 @@ export default function UniverseHub() {
       </div>
       <FoundationsSection />
       <AttractorSection />
+      <AttuneOSSection />
     </main>
   );
 }
