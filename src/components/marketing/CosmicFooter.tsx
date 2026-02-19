@@ -65,8 +65,6 @@ export function CosmicFooter() {
             "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 255, 148, 0.03) 0%, rgba(124, 58, 237, 0.02) 30%, #000000 70%)",
         }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-attune-void via-transparent to-black" />
-
       {/* Top accent line */}
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-attune-green/15 to-transparent" />
 
