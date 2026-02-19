@@ -1,13 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-} from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { ArrowRight, Cpu, GitBranch, Radio, Zap, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -59,13 +53,6 @@ export function AttractorSection() {
   const headlineYRaw = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const headlineY = useSpring(headlineYRaw, SPRING);
 
-  const orbScaleRaw = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1.15, 0.85]);
-  const orbOpacityRaw = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.9, 1, 0.3]);
-  const orbScale = useSpring(orbScaleRaw, SPRING);
-  const orbOpacity = useSpring(orbOpacityRaw, SPRING);
-
-  const overlayOpacityRaw = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
-  const overlayOpacity = useSpring(overlayOpacityRaw, SPRING);
 
   const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -74,35 +61,10 @@ export function AttractorSection() {
       ref={sectionRef}
       className="contain-paint relative min-h-[280vh] bg-attune-void"
     >
-      {/* Purple overlay that tints constellation stars green → purple */}
-      <motion.div
-        className="pointer-events-none fixed inset-0 z-1 bg-linear-to-b from-attune-purple/8 via-attune-purple/4 to-transparent"
-        style={{ opacity: overlayOpacity }}
-      />
-
       {/* ═══════════════════════════════════════
           Sticky "THE ATTRACTOR." watermark + Orb
           ═══════════════════════════════════════ */}
-      <div className="sticky top-0 z-0 flex h-screen items-center justify-center overflow-hidden">
-        {/* Pulsing Attractor Orb */}
-        <motion.div
-          className="pointer-events-none absolute"
-          style={{
-            scale: orbScale,
-            opacity: orbOpacity,
-            willChange: "transform, opacity",
-          }}
-        >
-          {/* Outer aura */}
-          <div className="absolute left-1/2 top-1/2 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.25)_0%,rgba(124,58,237,0.08)_40%,transparent_70%)] blur-[60px] animate-pulse-slow" />
-          {/* Mid ring */}
-          <div className="absolute left-1/2 top-1/2 size-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.4)_0%,rgba(124,58,237,0.12)_50%,transparent_75%)] blur-2xl animate-pulse-slow [animation-delay:0.5s]" />
-          {/* Core */}
-          <div className="absolute left-1/2 top-1/2 size-[140px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.7)_0%,rgba(124,58,237,0.3)_40%,transparent_70%)] blur-[20px] animate-pulse-slow [animation-delay:1s]" />
-          {/* Hot center */}
-          <div className="absolute left-1/2 top-1/2 size-[40px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-attune-purple/60 blur-sm" />
-        </motion.div>
-
+      <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden">
         {/* Watermark headline */}
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <motion.h2
