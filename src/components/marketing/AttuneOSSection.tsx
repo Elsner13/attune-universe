@@ -65,7 +65,7 @@ function SkillTreeSVG() {
             y1={a.y}
             x2={b.x}
             y2={b.y}
-            stroke="rgba(0, 255, 148, 0.15)"
+            stroke="rgba(0, 180, 255, 0.15)"
             strokeWidth="0.4"
           />
         );
@@ -76,7 +76,7 @@ function SkillTreeSVG() {
             cx={node.x}
             cy={node.y}
             r={node.active ? 2.5 : 1.8}
-            fill={node.active ? "rgba(0, 255, 148, 0.8)" : "rgba(255,255,255,0.1)"}
+            fill={node.active ? "rgba(0, 180, 255, 0.8)" : "rgba(255,255,255,0.1)"}
           />
           {node.active && (
             <circle
@@ -84,7 +84,7 @@ function SkillTreeSVG() {
               cy={node.y}
               r="4.5"
               fill="none"
-              stroke="rgba(0, 255, 148, 0.2)"
+              stroke="rgba(0, 180, 255, 0.2)"
               strokeWidth="0.3"
             />
           )}
@@ -92,7 +92,7 @@ function SkillTreeSVG() {
             x={node.x}
             y={node.y + 6}
             textAnchor="middle"
-            fill={node.active ? "rgba(0, 255, 148, 0.6)" : "rgba(255,255,255,0.2)"}
+            fill={node.active ? "rgba(0, 180, 255, 0.6)" : "rgba(255,255,255,0.2)"}
             fontSize="2.8"
             fontFamily="monospace"
           >
@@ -128,19 +128,19 @@ function NodeGraphSVG() {
           y1={nodes[a].cy}
           x2={nodes[b].cx}
           y2={nodes[b].cy}
-          stroke="rgba(0, 255, 148, 0.12)"
+          stroke="rgba(0, 180, 255, 0.12)"
           strokeWidth="0.3"
         />
       ))}
       {nodes.map((n, i) => (
         <g key={i}>
-          <circle cx={n.cx} cy={n.cy} r="1.5" fill="rgba(0, 255, 148, 0.5)" />
+          <circle cx={n.cx} cy={n.cy} r="1.5" fill="rgba(0, 180, 255, 0.5)" />
           <circle
             cx={n.cx}
             cy={n.cy}
             r="3"
             fill="none"
-            stroke="rgba(0, 255, 148, 0.15)"
+            stroke="rgba(0, 180, 255, 0.15)"
             strokeWidth="0.3"
           />
         </g>
@@ -184,7 +184,7 @@ function EditorMockup() {
             </span>
             <span
               className={`font-mono text-[10px] leading-[1.8] ${
-                line.highlight ? "text-attune-green/70" : "text-white/25"
+                line.highlight ? "text-attune-blue/70" : "text-white/25"
               }`}
             >
               {line.text || "\u00A0"}
@@ -207,25 +207,25 @@ function FloatingOSMockup({ rotateX, rotateY }: { rotateX: MotionValue<number>; 
       className="relative w-full max-w-3xl will-change-transform"
     >
       {/* Outer glow */}
-      <div className="pointer-events-none absolute -inset-4 rounded-3xl bg-attune-green/4 blur-2xl" />
+      <div className="pointer-events-none absolute -inset-4 rounded-3xl bg-attune-blue/4 blur-2xl" />
 
       {/* Main mockup container */}
-      <div className="relative overflow-hidden rounded-2xl border border-attune-green/15 bg-[#080808] shadow-[0_0_80px_rgba(0,255,148,0.08)]">
+      <div className="relative overflow-hidden rounded-2xl border border-attune-blue/15 bg-[#080808] shadow-[0_0_80px_rgba(0,180,255,0.08)]">
         {/* Top bar */}
         <div className="flex items-center justify-between border-b border-white/6 px-4 py-2.5">
           <div className="flex items-center gap-2.5">
-            <Brain className="size-4 text-attune-green/60" />
+            <Brain className="size-4 text-attune-blue/60" />
             <span className="font-mono text-[10px] font-medium tracking-wider text-white/40">
               ATTUNE OS
             </span>
-            <span className="rounded-full bg-attune-green/10 px-2 py-0.5 font-mono text-[8px] tracking-widest text-attune-green/60">
+            <span className="rounded-full bg-attune-blue/10 px-2 py-0.5 font-mono text-[8px] tracking-widest text-attune-blue/60">
               v0.1-alpha
             </span>
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
-              <div className="size-1.5 animate-pulse rounded-full bg-attune-green" />
-              <span className="font-mono text-[9px] tracking-wider text-attune-green/50">
+              <div className="size-1.5 animate-pulse rounded-full bg-attune-blue" />
+              <span className="font-mono text-[9px] tracking-wider text-attune-blue/50">
                 SYNCED
               </span>
             </div>
@@ -274,7 +274,7 @@ function FloatingOSMockup({ rotateX, rotateY }: { rotateX: MotionValue<number>; 
                   <span className="font-mono text-[8px] uppercase tracking-wider text-white/20">
                     {stat.label}
                   </span>
-                  <span className="font-mono text-[9px] tabular-nums text-attune-green/60">
+                  <span className="font-mono text-[9px] tabular-nums text-attune-blue/60">
                     {stat.value}
                   </span>
                 </div>
@@ -288,7 +288,7 @@ function FloatingOSMockup({ rotateX, rotateY }: { rotateX: MotionValue<number>; 
           <span className="font-mono text-[8px] tracking-wider text-white/15">
             session://basketball.shooting — constraint_set_active
           </span>
-          <span className="font-mono text-[8px] tracking-wider text-attune-green/30">
+          <span className="font-mono text-[8px] tracking-wider text-attune-blue/30">
             ◆ 3 affordances detected
           </span>
         </div>
@@ -325,7 +325,7 @@ export function AttuneOSSection() {
 
   const spotlightX = useMotionValue(50);
   const spotlightY = useMotionValue(50);
-  const spotlightBg = useMotionTemplate`radial-gradient(600px circle at ${spotlightX}% ${spotlightY}%, rgba(0, 255, 148, 0.03), transparent 70%)`;
+  const spotlightBg = useMotionTemplate`radial-gradient(600px circle at ${spotlightX}% ${spotlightY}%, rgba(0, 180, 255, 0.03), transparent 70%)`;
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -369,11 +369,11 @@ export function AttuneOSSection() {
           >
             THE
             <br />
-            OS.
+            TOOL.
           </motion.h2>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-attune-green/15 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-attune-blue/15 to-transparent" />
       </div>
 
       {/* ═══════════════════════════════════════
@@ -389,7 +389,7 @@ export function AttuneOSSection() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mb-16 text-center"
           >
-            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-attune-green/20 bg-attune-green/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-attune-green">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-attune-blue/20 bg-attune-blue/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-attune-blue">
               <Brain className="size-3" />
               System Architecture — v0.1
             </span>
@@ -405,7 +405,7 @@ export function AttuneOSSection() {
           >
             <h3 className="text-authority text-6xl font-black text-attune-starlight sm:text-7xl md:text-8xl lg:text-9xl">
               THE{" "}
-              <span className="text-attune-green text-glow-green">OS.</span>
+              <span className="text-attune-blue text-glow-blue">OS.</span>
             </h3>
           </motion.div>
 
@@ -441,7 +441,7 @@ export function AttuneOSSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6 }}
-              className="mb-8 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-attune-green/40"
+              className="mb-8 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-attune-blue/40"
             >
               ── System Capabilities ──
             </motion.p>
@@ -458,16 +458,16 @@ export function AttuneOSSection() {
                     delay: i * 0.07,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="group flex flex-col items-center gap-3 rounded-xl border border-attune-green/8 bg-[#080808]/80 px-4 py-5 text-center backdrop-blur-sm transition-colors duration-500 hover:border-attune-green/20"
+                  className="group flex flex-col items-center gap-3 rounded-xl border border-attune-blue/8 bg-[#080808]/80 px-4 py-5 text-center backdrop-blur-sm transition-colors duration-500 hover:border-attune-blue/20"
                 >
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-attune-green/6 transition-colors duration-500 group-hover:bg-attune-green/10">
-                    <spec.icon className="size-4 text-attune-green/50 transition-colors duration-500 group-hover:text-attune-green/80" />
+                  <div className="flex size-9 items-center justify-center rounded-lg bg-attune-blue/6 transition-colors duration-500 group-hover:bg-attune-blue/10">
+                    <spec.icon className="size-4 text-attune-blue/50 transition-colors duration-500 group-hover:text-attune-blue/80" />
                   </div>
                   <span className="font-mono text-[10px] font-medium uppercase leading-tight tracking-wider text-attune-starlight/50">
                     {spec.label}
                   </span>
-                  <span className="inline-flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.2em] text-attune-green/40">
-                    <span className="size-1 rounded-full bg-attune-green/60" />
+                  <span className="inline-flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.2em] text-attune-blue/40">
+                    <span className="size-1 rounded-full bg-attune-blue/60" />
                     {spec.status}
                   </span>
                 </motion.div>
@@ -483,24 +483,24 @@ export function AttuneOSSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-green/15 bg-[#080808]/90 backdrop-blur-xl"
+            className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-attune-blue/15 bg-[#080808]/90 backdrop-blur-xl"
           >
             {/* Border glow effect */}
-            <div className="pointer-events-none absolute -inset-px rounded-3xl bg-linear-to-b from-attune-green/20 via-transparent to-attune-green/10 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-green/6 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-green/4 blur-[80px]" />
+            <div className="pointer-events-none absolute -inset-px rounded-3xl bg-linear-to-b from-attune-blue/20 via-transparent to-attune-blue/10 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+            <div className="pointer-events-none absolute -left-20 -top-20 size-60 rounded-full bg-attune-blue/6 blur-[80px]" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 size-40 rounded-full bg-attune-blue/4 blur-[80px]" />
 
             {/* Top accent line */}
-            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-green/40 to-transparent" />
+            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-blue/40 to-transparent" />
 
             <div className="relative px-8 py-10 sm:px-12 sm:py-14">
               {/* Badge */}
               <div className="mb-8 flex items-center gap-3">
-                <div className="flex size-12 items-center justify-center rounded-2xl border border-attune-green/20 bg-attune-green/8">
-                  <Brain className="size-6 text-attune-green" />
+                <div className="flex size-12 items-center justify-center rounded-2xl border border-attune-blue/20 bg-attune-blue/8">
+                  <Brain className="size-6 text-attune-blue" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-green/70">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-attune-blue/70">
                     Coming Soon
                   </span>
                   <h4 className="font-display text-2xl font-bold text-attune-starlight sm:text-3xl">
@@ -528,7 +528,7 @@ export function AttuneOSSection() {
                     key={item}
                     className="flex items-start gap-2.5 text-sm text-attune-starlight/60"
                   >
-                    <div className="mt-1.5 size-1 shrink-0 rounded-full bg-attune-green" />
+                    <div className="mt-1.5 size-1 shrink-0 rounded-full bg-attune-blue" />
                     <span className="font-mono text-xs leading-relaxed">{item}</span>
                   </div>
                 ))}
@@ -542,10 +542,10 @@ export function AttuneOSSection() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-attune-green/20 bg-attune-green/5 px-5 py-4"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-attune-blue/20 bg-attune-blue/5 px-5 py-4"
                 >
-                  <Sparkles className="size-4 text-attune-green" />
-                  <span className="font-mono text-sm text-attune-green">
+                  <Sparkles className="size-4 text-attune-blue" />
+                  <span className="font-mono text-sm text-attune-blue">
                     You&apos;re on the list. We&apos;ll be in touch.
                   </span>
                 </motion.div>
@@ -566,13 +566,13 @@ export function AttuneOSSection() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="border-attune-green/10 bg-attune-void/60 pl-9 text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-green/30 focus-visible:ring-attune-green/20"
+                        className="border-attune-blue/10 bg-attune-void/60 pl-9 text-sm text-attune-starlight placeholder:text-attune-starlight/25 focus-visible:border-attune-blue/30 focus-visible:ring-attune-blue/20"
                       />
                     </div>
                     <Button
                       type="submit"
                       size="lg"
-                      className="os-cta-glow group/cta gap-2 border border-attune-green/30 bg-attune-green px-8 text-base font-bold text-attune-void transition-all duration-300 hover:bg-attune-green/90 hover:shadow-[0_0_60px_rgba(0,255,148,0.45)]"
+                      className="os-cta-glow group/cta gap-2 border border-attune-blue/30 bg-attune-blue px-8 text-base font-bold text-attune-void transition-all duration-300 hover:bg-attune-blue/90 hover:shadow-[0_0_60px_rgba(0,180,255,0.45)]"
                     >
                       JOIN THE WAITLIST
                       <ArrowRight className="size-5 transition-transform duration-300 group-hover/cta:translate-x-0.5" />
@@ -586,7 +586,7 @@ export function AttuneOSSection() {
             </div>
 
             {/* Bottom accent line */}
-            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-green/20 to-transparent" />
+            <div className="h-px w-full bg-linear-to-r from-transparent via-attune-blue/20 to-transparent" />
           </motion.div>
         </div>
       </div>

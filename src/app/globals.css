@@ -19,6 +19,7 @@
   --color-attune-starlight: #F8FAFC;
   --color-attune-green: #00FF94;
   --color-attune-purple: #7C3AED;
+  --color-attune-blue: #00B4FF;
   --color-attune-obsidian: #121212;
 
   /* Animations */
@@ -245,13 +246,13 @@ html.lenis body {
     contain: paint;
   }
 
-  /* Attune OS grid background — CSS-only glowing green blueprint grid */
+  /* Attune OS grid background — CSS-only glowing cosmic blue blueprint grid */
   .os-grid-bg {
     background-image:
-      linear-gradient(rgba(0, 255, 148, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 148, 0.04) 1px, transparent 1px),
-      linear-gradient(rgba(0, 255, 148, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 148, 0.02) 1px, transparent 1px);
+      linear-gradient(rgba(0, 180, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 180, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(rgba(0, 180, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 180, 255, 0.02) 1px, transparent 1px);
     background-size:
       100px 100px,
       100px 100px,
@@ -263,9 +264,22 @@ html.lenis body {
   /* OS CTA button glow */
   .os-cta-glow {
     box-shadow:
-      0 0 20px rgba(0, 255, 148, 0.3),
-      0 0 60px rgba(0, 255, 148, 0.1),
+      0 0 20px rgba(0, 180, 255, 0.3),
+      0 0 60px rgba(0, 180, 255, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  /* Cosmic Blue glow */
+  .glow-blue {
+    box-shadow:
+      0 0 20px rgba(0, 180, 255, 0.35),
+      0 0 60px rgba(0, 180, 255, 0.15);
+  }
+
+  .text-glow-blue {
+    text-shadow:
+      0 0 10px rgba(0, 180, 255, 0.5),
+      0 0 40px rgba(0, 180, 255, 0.2);
   }
 
   /* Noise overlay — subtle film grain texture */
