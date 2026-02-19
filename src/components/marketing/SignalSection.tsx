@@ -95,10 +95,8 @@ export function SignalSection() {
   return (
     <section
       ref={sectionRef}
-      className="signal-scanline relative min-h-[260vh]"
+      className="relative min-h-[260vh]"
     >
-      {/* CRT vignette overlay */}
-      <div className="pointer-events-none absolute inset-0 z-1 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.6)_100%)]" />
 
       {/* Sticky "THE SIGNAL." watermark */}
       <div className="sticky top-0 z-0 flex h-screen items-center overflow-hidden">
