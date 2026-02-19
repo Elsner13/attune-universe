@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 const stagger: Variants = {
   hidden: {},
@@ -174,9 +175,14 @@ export function Hero() {
                     one-time
                   </span>
                 </div>
-                <Button className="w-full bg-attune-green font-semibold text-attune-void shadow-[0_0_24px_rgba(0,255,148,0.3)] transition-all duration-300 hover:bg-attune-green/90 hover:shadow-[0_0_36px_rgba(0,255,148,0.45)]">
-                  START HERE
-                  <ArrowRight className="size-4" />
+                <Button
+                  asChild
+                  className="w-full bg-attune-green font-semibold text-attune-void shadow-[0_0_24px_rgba(0,255,148,0.3)] transition-all duration-300 hover:bg-attune-green/90 hover:shadow-[0_0_36px_rgba(0,255,148,0.45)]"
+                >
+                  <Link href="/foundations">
+                    START HERE
+                    <ArrowRight className="size-4" />
+                  </Link>
                 </Button>
               </div>
             </div>

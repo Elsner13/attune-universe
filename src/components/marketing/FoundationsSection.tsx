@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { ArrowRight, BookOpen, Target, Eye, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
@@ -238,11 +239,14 @@ export function FoundationsSection() {
                 </div>
 
                 <Button
+                  asChild
                   size="lg"
                   className="gap-2 bg-attune-green px-8 text-base font-bold text-attune-void shadow-[0_0_30px_rgba(0,255,148,0.35)] transition-all duration-300 hover:bg-attune-green/90 hover:shadow-[0_0_50px_rgba(0,255,148,0.5)]"
                 >
-                  SECURE ACCESS
-                  <ArrowRight className="size-5" />
+                  <Link href="/foundations">
+                    SECURE ACCESS
+                    <ArrowRight className="size-5" />
+                  </Link>
                 </Button>
               </div>
             </div>

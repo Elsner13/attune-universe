@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Orbit, Library, Zap, Cpu, Radio } from "lucide-react";
+import { Orbit, Library, Zap, Cpu, Radio, ArrowRight } from "lucide-react";
 import { useLenis } from "@/components/providers/SmoothScrollProvider";
+import Link from "next/link";
 
 const NAV_ITEMS = [
   { id: "hero", icon: Orbit, label: "00_ORIGIN", tooltip: "Origin" },
@@ -229,10 +230,17 @@ export function CommandCenter() {
         ))}
       </div>
 
-      {/* Version tag */}
-      <div className="flex h-12 items-center justify-center">
-        <span className="font-mono text-[8px] tracking-widest text-white/15">
-          v0.1
+      {/* Foundations CTA */}
+      <div className="flex flex-col items-center gap-2 pb-4">
+        <Link
+          href="/foundations"
+          className="group relative flex size-10 items-center justify-center rounded-md border border-attune-green/20 bg-attune-green/5 transition-all duration-300 hover:border-attune-green/40 hover:bg-attune-green/10 hover:shadow-[0_0_20px_rgba(0,255,148,0.15)]"
+          aria-label="Foundations Course"
+        >
+          <ArrowRight className="size-[18px] text-attune-green/70 transition-colors duration-300 group-hover:text-attune-green" />
+        </Link>
+        <span className="font-mono text-[7px] tracking-widest text-attune-green/40">
+          START
         </span>
       </div>
     </motion.nav>
