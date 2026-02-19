@@ -158,6 +158,19 @@ html.lenis body {
 
 /* ─── Keyframes ─── */
 
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes glitch-shift {
+  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  20% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, -1px); }
+  40% { clip-path: inset(60% 0 10% 0); transform: translate(3px, 1px); }
+  60% { clip-path: inset(40% 0 30% 0); transform: translate(-2px, 2px); }
+  80% { clip-path: inset(10% 0 70% 0); transform: translate(2px, -1px); }
+}
+
 @keyframes pulse-slow {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.85; }
@@ -280,6 +293,56 @@ html.lenis body {
     text-shadow:
       0 0 10px rgba(0, 180, 255, 0.5),
       0 0 40px rgba(0, 180, 255, 0.2);
+  }
+
+  /* CRT scanline — GPU-accelerated vertical sweep */
+  .signal-scanline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 255, 148, 0.04) 40%,
+      rgba(0, 255, 148, 0.06) 50%,
+      rgba(0, 255, 148, 0.04) 60%,
+      transparent
+    );
+    animation: scanline 6s linear infinite;
+    will-change: transform;
+  }
+
+  /* Glitch hover effect for "THE SIGNAL" headline */
+  .signal-glitch {
+    position: relative;
+  }
+
+  .signal-glitch::before,
+  .signal-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .signal-glitch:hover::before {
+    opacity: 0.8;
+    color: #00FF94;
+    animation: glitch-shift 0.3s steps(2, jump-none) infinite;
+    mix-blend-mode: screen;
+  }
+
+  .signal-glitch:hover::after {
+    opacity: 0.5;
+    color: #F8FAFC;
+    animation: glitch-shift 0.3s steps(3, jump-none) reverse infinite;
+    mix-blend-mode: screen;
   }
 
   /* Noise overlay — subtle film grain texture */
