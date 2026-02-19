@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useTransition } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Crosshair,
@@ -11,7 +12,7 @@ import {
   X,
   AlertTriangle,
   ChevronRight,
-  Lock,
+  CheckCircle2,
   Eye,
   GitBranch,
   Layers,
@@ -20,6 +21,7 @@ import {
   Map,
   Rocket,
 } from "lucide-react";
+import { MODULES } from "@/data/modules";
 import { updateFoundationsField } from "./actions";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -33,57 +35,9 @@ const snap = {
   }),
 };
 
-const MODULES = [
-  {
-    id: "M00",
-    title: "The Blueprint",
-    subtitle: "Reference Architecture",
-    icon: Map,
-    accent: "attune-signal",
-  },
-  {
-    id: "M01",
-    title: "The Ecological Revolution",
-    subtitle: "Perception Rewired",
-    icon: Eye,
-    accent: "attune-signal",
-  },
-  {
-    id: "M02",
-    title: "Perception-Action Coupling",
-    subtitle: "Close the Loop",
-    icon: GitBranch,
-    accent: "attune-signal",
-  },
-  {
-    id: "M03",
-    title: "Constraints & Affordances",
-    subtitle: "Architect Your Environment",
-    icon: Layers,
-    accent: "attune-signal",
-  },
-  {
-    id: "M04",
-    title: "Dynamic Systems Theory",
-    subtitle: "Self-Organization",
-    icon: Activity,
-    accent: "attune-signal",
-  },
-  {
-    id: "M05",
-    title: "The Attunement Protocol",
-    subtitle: "Ecological Mastery",
-    icon: Orbit,
-    accent: "attune-signal",
-  },
-  {
-    id: "M06",
-    title: "The Attractor State",
-    subtitle: "Achieve Escape Velocity",
-    icon: Rocket,
-    accent: "attune-signal",
-  },
-];
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Map, Eye, GitBranch, Layers, Activity, Orbit, Rocket,
+};
 
 function BootSequence({ onComplete }: { onComplete: () => void }) {
   const [line, setLine] = useState(0);
@@ -262,55 +216,65 @@ function EditableField({
 function ModuleCard({
   mod,
   index,
-  locked,
+  isCompleted,
 }: {
   mod: (typeof MODULES)[number];
   index: number;
-  locked: boolean;
+  isCompleted: boolean;
 }) {
-  const Icon = mod.icon;
+  const Icon = ICON_MAP[mod.icon] || Map;
 
   return (
-    <motion.div
-      custom={index + 8}
-      variants={snap}
-      className="group relative overflow-hidden rounded-lg border border-white/[0.05] bg-white/[0.02] transition-all duration-300 hover:border-attune-signal/30 hover:bg-white/[0.04]"
-    >
-      <div className="pointer-events-none absolute -right-4 -top-4 font-kinetic text-[80px] font-black leading-none text-white/[0.02] transition-all duration-300 group-hover:text-attune-signal/[0.06]">
-        {mod.id}
-      </div>
+    <Link href={`/foundations/modules/${mod.slug}`}>
+      <motion.div
+        custom={index + 8}
+        variants={snap}
+        className="group relative h-full overflow-hidden rounded-lg border border-white/[0.05] bg-white/[0.02] transition-all duration-300 hover:border-attune-signal/30 hover:bg-white/[0.04]"
+      >
+        <div className="pointer-events-none absolute -right-4 -top-4 font-kinetic text-[80px] font-black leading-none text-white/[0.02] transition-all duration-300 group-hover:text-attune-signal/[0.06]">
+          {mod.id}
+        </div>
 
-      <div className="relative flex h-full flex-col justify-between p-5">
-        <div>
-          <div className="mb-3 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Icon className="size-4 text-attune-signal/50 transition-colors group-hover:text-attune-signal" />
-              <span className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-white/20">
-                {mod.id}
-              </span>
+        <div className="relative flex h-full flex-col justify-between p-5">
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Icon className="size-4 text-attune-signal/50 transition-colors group-hover:text-attune-signal" />
+                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-white/20">
+                  {mod.id}
+                </span>
+              </div>
+              {isCompleted && (
+                <CheckCircle2 className="size-3.5 text-attune-signal/50" />
+              )}
             </div>
-            {locked && <Lock className="size-3 text-white/10" />}
+
+            <h3 className={`font-kinetic text-sm font-bold uppercase tracking-wide transition-all duration-300 group-hover:translate-x-1 group-hover:text-white ${isCompleted ? "text-white/40" : "text-white/80"}`}>
+              {mod.title}
+            </h3>
+            <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-white/20">
+              {mod.subtitle}
+            </p>
           </div>
 
-          <h3 className="font-kinetic text-sm font-bold uppercase tracking-wide text-white/80 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">
-            {mod.title}
-          </h3>
-          <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-white/20">
-            {mod.subtitle}
-          </p>
-        </div>
-
-        <div className="mt-4 flex items-center justify-between">
-          <div className="h-[2px] flex-1 rounded-full bg-white/[0.04]">
-            <div
-              className="h-full rounded-full bg-attune-signal/30 transition-all duration-300 group-hover:bg-attune-signal/60"
-              style={{ width: locked ? "0%" : "0%" }}
-            />
+          <div className="mt-4 flex items-center justify-between">
+            <div className="h-[2px] flex-1 rounded-full bg-white/[0.04]">
+              <div
+                className="h-full rounded-full bg-attune-signal/40 transition-all duration-300 group-hover:bg-attune-signal/60"
+                style={{ width: isCompleted ? "100%" : "0%" }}
+              />
+            </div>
+            {isCompleted ? (
+              <span className="ml-2 font-mono text-[7px] font-bold uppercase tracking-[0.15em] text-attune-signal/40">
+                Deployed
+              </span>
+            ) : (
+              <ChevronRight className="ml-2 size-3.5 text-white/10 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-attune-signal/60" />
+            )}
           </div>
-          <ChevronRight className="ml-2 size-3.5 text-white/10 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-attune-signal/60" />
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -319,15 +283,18 @@ export function DashboardClient({
   domain,
   constraint,
   goal,
+  completedModules,
 }: {
   firstName: string;
   domain: string;
   constraint: string;
   goal: string;
+  completedModules: string[];
 }) {
   const [booted, setBooted] = useState(false);
-  const currentModule = MODULES[1];
-  const executionRate = 0;
+
+  const nextModule = MODULES.find((m) => !completedModules.includes(m.slug)) || MODULES[0];
+  const executionRate = Math.round((completedModules.length / MODULES.length) * 100);
 
   return (
     <>
@@ -402,10 +369,10 @@ export function DashboardClient({
                   </div>
 
                   <h2 className="font-kinetic text-2xl font-black uppercase tracking-tight text-white lg:text-3xl">
-                    {currentModule.id}: {currentModule.title}
+                    {nextModule.id}: {nextModule.title}
                   </h2>
                   <p className="mt-1 font-mono text-xs uppercase tracking-wider text-white/30">
-                    {currentModule.subtitle}
+                    {nextModule.subtitle}
                   </p>
 
                   {/* Progress bar */}
@@ -431,14 +398,13 @@ export function DashboardClient({
                     </div>
                   </div>
 
-                  <motion.button
-                    custom={2}
-                    variants={snap}
+                  <Link
+                    href={`/foundations/modules/${nextModule.slug}`}
                     className="mt-6 inline-flex items-center gap-2.5 rounded-md border border-attune-signal/30 bg-attune-signal/10 px-6 py-3 font-kinetic text-sm font-bold uppercase tracking-wider text-attune-signal transition-all duration-200 hover:bg-attune-signal hover:text-[#030303] hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]"
                   >
                     <Zap className="size-4" />
                     Deploy
-                  </motion.button>
+                  </Link>
                 </div>
               </motion.div>
 
@@ -526,7 +492,7 @@ export function DashboardClient({
                   </span>
                 </div>
                 <span className="font-mono text-[9px] uppercase tracking-widest text-white/10">
-                  0 / {MODULES.length} Deployed
+                  {completedModules.length} / {MODULES.length} Deployed
                 </span>
               </motion.div>
 
@@ -536,7 +502,7 @@ export function DashboardClient({
                     key={mod.id}
                     mod={mod}
                     index={i}
-                    locked={i > 1}
+                    isCompleted={completedModules.includes(mod.slug)}
                   />
                 ))}
               </div>

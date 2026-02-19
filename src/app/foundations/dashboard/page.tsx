@@ -20,6 +20,7 @@ export default async function DashboardPage() {
       domain?: string;
       constraint?: string;
       goal?: string;
+      completedModules?: string[];
     };
   };
 
@@ -33,6 +34,7 @@ export default async function DashboardPage() {
       domain={meta.foundations?.domain || ""}
       constraint={meta.foundations?.constraint || ""}
       goal={meta.foundations?.goal || ""}
+      completedModules={meta.foundations?.completedModules || []}
     />
   );
 }
