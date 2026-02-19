@@ -350,7 +350,7 @@ export function AttuneOSSection() {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="os-grid-bg contain-paint relative min-h-[280vh] bg-attune-void"
+      className="contain-paint relative min-h-[280vh] bg-attune-void"
     >
       {/* Spotlight follow layer */}
       <motion.div

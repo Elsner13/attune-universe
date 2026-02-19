@@ -279,21 +279,6 @@ html.lenis body {
     contain: paint;
   }
 
-  /* Attune OS grid background — CSS-only glowing cosmic blue blueprint grid */
-  .os-grid-bg {
-    background-image:
-      linear-gradient(rgba(0, 180, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 180, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(rgba(0, 180, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 180, 255, 0.02) 1px, transparent 1px);
-    background-size:
-      100px 100px,
-      100px 100px,
-      20px 20px,
-      20px 20px;
-    background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
-  }
-
   /* OS CTA button glow */
   .os-cta-glow {
     box-shadow:
