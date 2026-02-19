@@ -94,6 +94,7 @@ export function SignalSection() {
 
   return (
     <section
+      id="signal"
       ref={sectionRef}
       className="relative min-h-[260vh]"
     >

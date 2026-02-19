@@ -58,6 +58,7 @@ export function AttractorSection() {
 
   return (
     <section
+      id="attractor"
       ref={sectionRef}
       className="relative min-h-[280vh]"
     >

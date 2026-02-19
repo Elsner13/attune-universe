@@ -43,7 +43,7 @@ export function Hero() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section className="relative min-h-screen">
+    <section id="hero" className="relative min-h-screen">
       <motion.div
         variants={stagger}
         initial="hidden"

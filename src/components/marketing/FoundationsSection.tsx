@@ -54,7 +54,7 @@ export function FoundationsSection() {
   const headlineY = useSpring(headlineYRaw, SPRING);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[250vh]">
+    <section id="foundations" ref={sectionRef} className="relative min-h-[250vh]">
       {/* ═══════════════════════════════════════
           Sticky "THE LINEAGE." watermark headline
           ═══════════════════════════════════════ */}

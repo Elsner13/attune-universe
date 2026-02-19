@@ -340,6 +340,7 @@ export function AttuneOSSection() {
 
   return (
     <section
+      id="attune-os"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
