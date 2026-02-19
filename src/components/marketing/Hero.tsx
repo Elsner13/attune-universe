@@ -43,7 +43,7 @@ export function Hero() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section className="contain-paint relative min-h-screen overflow-hidden bg-attune-void">
+    <section className="relative min-h-screen">
       <motion.div
         variants={stagger}
         initial="hidden"

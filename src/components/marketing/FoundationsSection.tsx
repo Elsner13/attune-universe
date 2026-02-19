@@ -54,7 +54,7 @@ export function FoundationsSection() {
   const headlineY = useSpring(headlineYRaw, SPRING);
 
   return (
-    <section ref={sectionRef} className="contain-paint relative min-h-[250vh] bg-attune-void">
+    <section ref={sectionRef} className="relative min-h-[250vh]">
       {/* ═══════════════════════════════════════
           Sticky "THE LINEAGE." watermark headline
           ═══════════════════════════════════════ */}

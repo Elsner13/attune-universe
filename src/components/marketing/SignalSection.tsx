@@ -95,7 +95,7 @@ export function SignalSection() {
   return (
     <section
       ref={sectionRef}
-      className="signal-scanline contain-paint relative min-h-[260vh] bg-attune-void"
+      className="signal-scanline relative min-h-[260vh]"
     >
       {/* CRT vignette overlay */}
       <div className="pointer-events-none absolute inset-0 z-1 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.6)_100%)]" />

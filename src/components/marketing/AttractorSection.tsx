@@ -59,7 +59,7 @@ export function AttractorSection() {
   return (
     <section
       ref={sectionRef}
-      className="contain-paint relative min-h-[280vh] bg-attune-void"
+      className="relative min-h-[280vh]"
     >
       {/* ═══════════════════════════════════════
           Sticky "THE ATTRACTOR." watermark + Orb
