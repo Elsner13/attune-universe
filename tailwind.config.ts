@@ -46,6 +46,10 @@ const config: Config = {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.85" },
         },
+        "copyright-pulse": {
+          "0%, 100%": { opacity: "0.2" },
+          "50%": { opacity: "0.35" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
@@ -53,6 +57,7 @@ const config: Config = {
         "scale-in": "scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "slide-in-left": "slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "pulse-slow": "pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "copyright-pulse": "copyright-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },

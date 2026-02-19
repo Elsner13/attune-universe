@@ -29,6 +29,7 @@
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-scale-in: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-slide-in-left: slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-copyright-pulse: copyright-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   /* Shadcn component tokens */
   --color-sidebar-ring: var(--sidebar-ring);
@@ -195,6 +196,11 @@ html.lenis body {
 @keyframes slide-in-left {
   from { opacity: 0; transform: translateX(-20px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes copyright-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.35; }
 }
 
 /* ─── Utility Layer ─── */

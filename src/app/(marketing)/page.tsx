@@ -7,6 +7,7 @@ import { FoundationsSection } from "@/components/marketing/FoundationsSection";
 import { AttractorSection } from "@/components/marketing/AttractorSection";
 import { AttuneOSSection } from "@/components/marketing/AttuneOSSection";
 import { SignalSection } from "@/components/marketing/SignalSection";
+import { CosmicFooter } from "@/components/marketing/CosmicFooter";
 import { ConstellationCanvas } from "@/components/marketing/ConstellationCanvas";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -41,6 +42,7 @@ export default function UniverseHub() {
       <AttractorSection />
       <AttuneOSSection />
       <SignalSection />
+      <CosmicFooter />
     </main>
   );
 }
