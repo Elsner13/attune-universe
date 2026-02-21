@@ -34,8 +34,8 @@ export function Hero() {
           className="mb-16 font-mono text-[10px] uppercase tracking-[0.25em] text-attune-starlight/40 sm:text-xs lg:mb-20"
         >
           2x NCAA National Champion{" "}
-          <span className="text-attune-yellow/60">&middot;</span> Contributor to
-          The Athletic &amp; ESPN{" "}
+          <span className="text-attune-yellow/60">&middot;</span> 6x NCAA
+          All-American{" "}
           <span className="text-attune-yellow/60">&middot;</span> 500+ Coaches
           &amp; Athletes Trained
         </motion.div>
