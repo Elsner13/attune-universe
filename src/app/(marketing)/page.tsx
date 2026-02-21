@@ -10,6 +10,7 @@ import { SignalSection } from "@/components/marketing/SignalSection";
 import { CosmicFooter } from "@/components/marketing/CosmicFooter";
 import { ConstellationCanvas } from "@/components/marketing/ConstellationCanvas";
 import { CommandCenter } from "@/components/marketing/CommandCenter";
+import { FounderSection } from "@/components/marketing/FounderSection";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
@@ -85,6 +86,7 @@ export default function UniverseHub() {
         <div ref={heroRef}>
           <Hero />
         </div>
+        <FounderSection />
         <FoundationsSection />
         <AttractorSection />
         <AttuneOSSection />
