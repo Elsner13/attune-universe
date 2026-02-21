@@ -22,6 +22,13 @@ const fadeUp: Variants = {
 export function Hero() {
   return (
     <section id="hero" className="relative min-h-screen">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(56,189,248,0.04) 0%, transparent 70%)",
+        }}
+      />
       <motion.div
         variants={stagger}
         initial="hidden"

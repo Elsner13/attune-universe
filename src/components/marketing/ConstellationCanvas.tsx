@@ -12,10 +12,9 @@ interface Star {
   opacity: number;
 }
 
-const STAR_COUNT = 90;
+const STAR_COUNT = 180;
 const CONNECTION_DISTANCE = 160;
 const CONNECTION_DIST_SQ = CONNECTION_DISTANCE * CONNECTION_DISTANCE;
-const SPEED = 0.12;
 const PARALLAX_STRENGTH = 30;
 const PULSE_SPEED = 0.0008;
 const MOUSE_LERP = 0.05;
@@ -28,8 +27,8 @@ function createGlowSprite(): HTMLCanvasElement {
   const ctx = sprite.getContext("2d")!;
   const half = size / 2;
   const grad = ctx.createRadialGradient(half, half, 0, half, half, half);
-  grad.addColorStop(0, "rgba(0, 255, 148, 0.25)");
-  grad.addColorStop(1, "rgba(0, 255, 148, 0)");
+  grad.addColorStop(0, "rgba(56, 189, 248, 0.25)");
+  grad.addColorStop(1, "rgba(56, 189, 248, 0)");
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, size, size);
   return sprite;
@@ -76,14 +75,18 @@ export function ConstellationCanvas() {
     const w = () => canvas!.width / dpr;
     const h = () => canvas!.height / dpr;
 
-    starsRef.current = Array.from({ length: STAR_COUNT }, () => ({
-      x: Math.random() * w(),
-      y: Math.random() * h(),
-      vx: (Math.random() - 0.5) * SPEED,
-      vy: (Math.random() - 0.5) * SPEED,
-      radius: Math.random() * 1.8 + 0.5,
-      opacity: Math.random() * 0.5 + 0.3,
-    }));
+    starsRef.current = Array.from({ length: STAR_COUNT }, () => {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 0.17 + 0.08;
+      return {
+        x: Math.random() * w(),
+        y: Math.random() * h(),
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        radius: Math.random() * 1.5 + 1,
+        opacity: Math.random() * 0.5 + 0.2,
+      };
+    });
 
     function draw(time: number) {
       if (!ctx || !canvas) return;
@@ -126,12 +129,12 @@ export function ConstellationCanvas() {
           const distSq = dx * dx + dy * dy;
           if (distSq < CONNECTION_DIST_SQ) {
             const dist = Math.sqrt(distSq);
-            const base = (1 - dist / CONNECTION_DISTANCE) * 0.12;
+            const base = (1 - dist / CONNECTION_DISTANCE) * 0.08;
             const alpha = base * (0.6 + pulse * 0.4);
             ctx.beginPath();
             ctx.moveTo(ax, ay);
             ctx.lineTo(stars[j].x + offsetX, stars[j].y + offsetY);
-            ctx.strokeStyle = `rgba(0, 255, 148, ${alpha})`;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
             ctx.stroke();
           }
         }
@@ -144,7 +147,7 @@ export function ConstellationCanvas() {
 
         ctx.beginPath();
         ctx.arc(sx, sy, s.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 255, 148, ${s.opacity})`;
+        ctx.fillStyle = `rgba(56, 189, 248, ${s.opacity})`;
         ctx.fill();
 
         const glowDiam = s.radius * 8;
