@@ -53,6 +53,9 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-text-primary: var(--text-primary);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -77,9 +80,10 @@
 :root {
   --radius: 0.625rem;
 
-  /* Core palette — "Gary Vee x Eden" */
-  --background: #050505;
+  /* Brand Identity */
+  --background: #081828;
   --foreground: #F8FAFC;
+  --text-primary: #EAEBE6;
   --surface: #121212;
 
   /* Primary: Ecological Green */
@@ -100,9 +104,11 @@
   --muted: #1A1A1A;
   --muted-foreground: #A1A1A1;
 
-  /* Accent */
-  --accent: #1A1A1A;
-  --accent-foreground: #F8FAFC;
+  /* Accent: Brand Cyan */
+  --accent: #38BDF8;
+  --accent-foreground: #081828;
+  --accent-glow: rgba(56, 189, 248, 0.3);
+  --accent-subtle: rgba(56, 189, 248, 0.1);
 
   /* Destructive */
   --destructive: #FF4444;
