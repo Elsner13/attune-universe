@@ -1,21 +1,9 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-};
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const credentials = [
   "2× NCAA NATIONAL CHAMPION",
@@ -25,32 +13,28 @@ const credentials = [
 
 export function FounderSection() {
   return (
-    <section
-      id="founder"
-      className="relative w-full"
-      style={{
-        backgroundColor: "#081828",
-        borderTop: "1px solid rgba(56, 189, 248, 0.06)",
-      }}
-    >
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-[120px] lg:px-12">
+    <section id="founder" className="relative py-20 md:py-[120px]">
+      {/* Section atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-[40%] h-[60%] w-[60%] -translate-x-1/2 rounded-full bg-[#38BDF8] blur-3xl opacity-[0.015]" />
+      </div>
+
+      {/* Top separator line */}
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#38BDF8]/10 to-transparent" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-[80px]">
           {/* Left column — Image */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            variants={fadeUp}
+            transition={{ duration: 0.8, ease: EASE }}
             className="flex flex-col items-center md:items-start"
           >
             <div
-              className="relative w-full overflow-hidden md:max-w-[480px]"
-              style={{
-                aspectRatio: "4 / 5",
-                borderRadius: 4,
-                border: "1px solid rgba(56, 189, 248, 0.2)",
-                boxShadow: "0 0 60px rgba(56, 189, 248, 0.06)",
-              }}
+              className="relative w-full overflow-hidden rounded-[4px] border border-[#38BDF8]/20 shadow-[0_0_60px_rgba(56,189,248,0.06)] md:max-w-[480px]"
+              style={{ aspectRatio: "4 / 5" }}
             >
               <Image
                 src="/images/founder.jpg"
@@ -60,26 +44,14 @@ export function FounderSection() {
                 sizes="(max-width: 768px) 100vw, 480px"
               />
             </div>
-            <p
-              className="mt-4 text-center uppercase tracking-widest md:text-left"
-              style={{
-                fontSize: 11,
-                color: "rgba(234, 235, 230, 0.4)",
-              }}
-            >
+            <p className="mt-4 text-center font-mono text-[11px] uppercase tracking-widest text-attune-starlight/30 md:text-left">
               SAM ELSNER — FOUNDER, ATTUNE
             </p>
           </motion.div>
 
           {/* Right column — Text */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}
-            className="relative"
-          >
-            {/* Radial gradient pseudo-element */}
+          <div className="relative">
+            {/* Radial gradient atmosphere */}
             <div
               className="pointer-events-none absolute inset-0"
               style={{
@@ -91,17 +63,22 @@ export function FounderSection() {
             <div className="relative">
               {/* Section label */}
               <motion.p
-                variants={fadeUp}
-                className="mb-4 uppercase tracking-widest"
-                style={{ fontSize: 12, color: "#38BDF8" }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, ease: EASE }}
+                className="mb-4 font-mono text-[10px] uppercase tracking-[0.25em] text-[#38BDF8]"
               >
                 THE ORIGIN
               </motion.p>
 
               {/* Headline */}
               <motion.h2
-                variants={fadeUp}
-                className="mb-8 text-[clamp(28px,7vw,40px)] font-extrabold leading-[1.1] text-[#EAEBE6] md:text-[clamp(32px,4vw,52px)]"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, delay: 0.05, ease: EASE }}
+                className="text-authority mb-8 text-[clamp(28px,7vw,40px)] font-black text-attune-starlight md:text-[clamp(32px,4vw,52px)]"
               >
                 She Had the Highest Vertical on the Team. And the Ball Hit the
                 Net.
@@ -109,9 +86,11 @@ export function FounderSection() {
 
               {/* Body copy 1 */}
               <motion.p
-                variants={fadeUp}
-                className="mb-6 text-base leading-[1.8] md:text-[17px]"
-                style={{ color: "rgba(234, 235, 230, 0.75)" }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, ease: EASE }}
+                className="mb-6 text-base leading-[1.8] text-attune-starlight/60 md:text-[17px]"
               >
                 24-23. Third match. The set came in and her stance was off —
                 weight distributed wrong, feet not where ten thousand practice
@@ -121,9 +100,11 @@ export function FounderSection() {
 
               {/* Body copy 2 */}
               <motion.p
-                variants={fadeUp}
-                className="mb-6 text-base leading-[1.8] md:text-[17px]"
-                style={{ color: "rgba(234, 235, 230, 0.75)" }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
+                className="mb-6 text-base leading-[1.8] text-attune-starlight/60 md:text-[17px]"
               >
                 She didn&apos;t fail because she lacked ability. She had more
                 vertical than anyone on that court. She failed because her
@@ -136,9 +117,11 @@ export function FounderSection() {
 
               {/* Body copy 3 */}
               <motion.p
-                variants={fadeUp}
-                className="mb-6 text-base leading-[1.8] md:text-[17px]"
-                style={{ color: "rgba(234, 235, 230, 0.75)" }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
+                className="mb-6 text-base leading-[1.8] text-attune-starlight/60 md:text-[17px]"
               >
                 I went looking for why. Not the motivational why. The scientific
                 why. I found James Gibson, I found Newell and Davids, I found a
@@ -154,9 +137,11 @@ export function FounderSection() {
 
               {/* Body copy 4 */}
               <motion.p
-                variants={fadeUp}
-                className="mb-10 text-base leading-[1.8] md:text-[17px]"
-                style={{ color: "rgba(234, 235, 230, 0.75)" }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+                className="mb-10 text-base leading-[1.8] text-attune-starlight/60 md:text-[17px]"
               >
                 I was a 2x NCAA National Champion and 6x All-American. I had
                 lived this science from the inside without knowing its name.
@@ -166,53 +151,43 @@ export function FounderSection() {
 
               {/* Signature */}
               <motion.p
-                variants={fadeUp}
-                className="mb-10 italic"
-                style={{
-                  fontFamily: "Georgia, 'Times New Roman', serif",
-                  fontSize: 20,
-                  color: "rgba(234, 235, 230, 0.5)",
-                }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.8 }}
+                className="mb-10 font-display text-xl italic text-attune-starlight/40"
               >
                 — Sam Elsner
               </motion.p>
 
               {/* Divider */}
               <motion.div
-                variants={fadeUp}
-                className="mb-10"
-                style={{
-                  width: 60,
-                  height: 1,
-                  backgroundColor: "#38BDF8",
-                  opacity: 0.4,
-                }}
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, ease: EASE }}
+                className="mb-10 h-px w-[60px] origin-left bg-[#38BDF8]/40"
               />
 
               {/* Credential pills */}
               <motion.div
-                variants={fadeUp}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, ease: EASE }}
                 className="flex flex-wrap gap-3"
               >
                 {credentials.map((label) => (
                   <span
                     key={label}
-                    className="uppercase tracking-wider"
-                    style={{
-                      background: "rgba(56, 189, 248, 0.06)",
-                      border: "1px solid rgba(56, 189, 248, 0.2)",
-                      borderRadius: 100,
-                      padding: "8px 18px",
-                      fontSize: 12,
-                      color: "rgba(234, 235, 230, 0.6)",
-                    }}
+                    className="rounded-full border border-[#38BDF8]/15 bg-[#38BDF8]/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-attune-starlight/50"
                   >
                     {label}
                   </span>
                 ))}
               </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
