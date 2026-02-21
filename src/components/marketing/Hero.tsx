@@ -22,6 +22,13 @@ const fadeUp: Variants = {
 export function Hero() {
   return (
     <section id="hero" className="relative min-h-screen">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(56,189,248,0.04) 0%, transparent 70%)",
+        }}
+      />
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -34,9 +41,9 @@ export function Hero() {
           className="mb-16 font-mono text-[10px] uppercase tracking-[0.25em] text-attune-starlight/40 sm:text-xs lg:mb-20"
         >
           2x NCAA National Champion{" "}
-          <span className="text-attune-yellow/60">&middot;</span> 6x NCAA
+          <span className="text-[#38BDF8]/60">&middot;</span> 6x NCAA
           All-American{" "}
-          <span className="text-attune-yellow/60">&middot;</span> 500+ Coaches
+          <span className="text-[#38BDF8]/60">&middot;</span> 500+ Coaches
           &amp; Athletes Trained
         </motion.div>
 
@@ -46,7 +53,7 @@ export function Hero() {
           className="flex flex-col gap-2 text-5xl font-black uppercase leading-none tracking-widest text-attune-starlight will-change-transform sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
         >
           <span>EVERYTHING YOU KNOW</span>
-          <span className="text-attune-yellow text-glow-yellow">
+          <span className="text-[#38BDF8]" style={{ textShadow: "0 0 12px rgba(56,189,248,0.4), 0 0 48px rgba(56,189,248,0.15)" }}>
             ABOUT PRACTICE IS WRONG.
           </span>
         </motion.h1>
@@ -69,7 +76,7 @@ export function Hero() {
           <Button
             asChild
             size="lg"
-            className="bg-attune-yellow px-8 font-semibold tracking-wide text-attune-void shadow-[0_0_24px_rgba(255,214,0,0.3)] transition-all duration-300 hover:bg-attune-yellow/90 hover:shadow-[0_0_36px_rgba(255,214,0,0.45)]"
+            className="bg-[#38BDF8] px-8 font-semibold tracking-wide text-attune-void shadow-[0_0_24px_rgba(56,189,248,0.3)] transition-all duration-300 hover:bg-[#38BDF8]/90 hover:shadow-[0_0_36px_rgba(56,189,248,0.45)]"
           >
             <Link href="/foundations">
               ENTER FOUNDATIONS — $97
