@@ -52,9 +52,9 @@ export function Hero() {
           variants={fadeUp}
           className="flex flex-col gap-2 text-5xl font-black uppercase leading-none tracking-widest text-attune-starlight will-change-transform sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
         >
-          <span>EVERYTHING YOU KNOW</span>
+          <span>YOU WERE NEVER BUILT WRONG.</span>
           <span className="text-[#38BDF8]" style={{ textShadow: "0 0 12px rgba(56,189,248,0.4), 0 0 48px rgba(56,189,248,0.15)" }}>
-            ABOUT PRACTICE IS WRONG.
+            YOU WERE TAUGHT WRONG.
           </span>
         </motion.h1>
 
@@ -63,9 +63,10 @@ export function Hero() {
           variants={fadeUp}
           className="mt-8 max-w-2xl text-base leading-relaxed text-attune-starlight/50 sm:text-lg"
         >
-          Ecological dynamics is the science elite operators don&apos;t talk
-          about. I used it to win two NCAA championships. Now I&apos;ve built
-          the framework that teaches it.
+          Attune is built on how skill actually develops in the real world
+          — not how we were taught it should. The gap between your practice
+          and your performance is not a talent problem. It is a model
+          problem. And the model is wrong.
         </motion.p>
 
         {/* ── CTA Buttons ── */}
