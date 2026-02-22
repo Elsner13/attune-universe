@@ -543,9 +543,18 @@ export function AttuneOSSection() {
               ) : (
                 <div className="space-y-4">
                   <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
-                      if (email) setSubmitted(true);
+                      if (email) {
+                        try {
+                          await fetch("/api/subscribe", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email, source: "os-homepage" }),
+                          });
+                        } catch { /* continue */ }
+                        setSubmitted(true);
+                      }
                     }}
                     className="flex flex-col gap-3 sm:flex-row"
                   >

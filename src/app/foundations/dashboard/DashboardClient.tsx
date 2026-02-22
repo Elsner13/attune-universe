@@ -20,6 +20,8 @@ import {
   Orbit,
   Map,
   Rocket,
+  Radio,
+  ArrowRight,
 } from "lucide-react";
 import { MODULES } from "@/data/modules";
 import { updateFoundationsField } from "./actions";
@@ -527,6 +529,43 @@ export function DashboardClient({
                   </p>
                 </div>
               </div>
+            </motion.div>
+
+            {/* ══ NEXT LEVEL UPSELL — The Attractor ══ */}
+            <motion.div
+              custom={17}
+              variants={snap}
+              initial="hidden"
+              animate="visible"
+              className="mt-6 overflow-hidden rounded-lg border border-attune-purple/15 bg-[#0c0c0c]"
+            >
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-attune-purple/30 to-transparent" />
+              <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-attune-purple/10">
+                    <Radio className="size-4 text-attune-purple/80" />
+                  </div>
+                  <div>
+                    <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-attune-purple/60">
+                      Ready to go deeper?
+                    </p>
+                    <p className="font-kinetic mt-0.5 text-sm font-bold text-white/70">
+                      The Attractor — 30-Day Live Cohort
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-white/30">
+                      AI companion. Daily constraint challenges. Make this framework your default state.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/attractor"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-md border border-attune-purple/30 bg-attune-purple/10 px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-wider text-attune-purple transition-all duration-200 hover:bg-attune-purple hover:text-white"
+                >
+                  Secure a Seat — $297
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-attune-purple/10 to-transparent" />
             </motion.div>
           </main>
         </div>

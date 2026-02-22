@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { ArrowRight, Cpu, GitBranch, Radio, Zap, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
@@ -277,11 +278,14 @@ export function AttractorSection() {
                 </div>
 
                 <Button
+                  asChild
                   size="lg"
                   className="group/cta gap-2 bg-attune-purple px-8 text-base font-bold text-white shadow-[0_0_30px_rgba(124,58,237,0.35)] transition-all duration-300 hover:bg-attune-purple/90 hover:shadow-[0_0_60px_rgba(124,58,237,0.55)]"
                 >
-                  SECURE YOUR SEAT
-                  <ArrowRight className="size-5 transition-transform duration-300 group-hover/cta:translate-x-0.5" />
+                  <Link href="/attractor">
+                    SECURE YOUR SEAT
+                    <ArrowRight className="size-5 transition-transform duration-300 group-hover/cta:translate-x-0.5" />
+                  </Link>
                 </Button>
               </div>
             </div>

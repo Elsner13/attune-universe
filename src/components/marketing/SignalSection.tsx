@@ -10,6 +10,7 @@ import {
 import { ArrowRight, Radio, Mail, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
@@ -306,19 +307,36 @@ export function SignalSection() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-attune-yellow/20 bg-attune-yellow/5 px-5 py-4"
+                  className="flex flex-col items-center gap-3"
                 >
-                  <Zap className="size-4 text-attune-yellow" />
-                  <span className="font-mono text-sm text-attune-yellow">
-                    Signal locked in. Check your inbox.
-                  </span>
+                  <div className="flex items-center justify-center gap-2 rounded-xl border border-attune-yellow/20 bg-attune-yellow/5 px-5 py-4 w-full">
+                    <Zap className="size-4 text-attune-yellow" />
+                    <span className="font-mono text-sm text-attune-yellow">
+                      Signal locked in. Check your inbox.
+                    </span>
+                  </div>
+                  <Link
+                    href="/signal"
+                    className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-attune-starlight/40 transition-colors duration-300 hover:text-attune-starlight/80"
+                  >
+                    View all issues <ArrowRight className="size-3" />
+                  </Link>
                 </motion.div>
               ) : (
                 <div className="space-y-4">
                   <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
-                      if (email) setSubmitted(true);
+                      if (email) {
+                        try {
+                          await fetch("/api/subscribe", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email, source: "signal-homepage" }),
+                          });
+                        } catch { /* continue */ }
+                        setSubmitted(true);
+                      }
                     }}
                     className="flex flex-col gap-3 sm:flex-row"
                   >

@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
+import { OSClient } from "./OSClient";
+
+export const metadata: Metadata = {
+  title: "Attune OS — Your Second Brain for Ecological Mastery",
+  description:
+    "An AI-powered intelligence system for ecological skill acquisition. Adaptive constraint design, real-time affordance mapping, and neural feedback loops. Join the early access waitlist.",
+  openGraph: {
+    title: "Attune OS — Your Second Brain for Ecological Mastery",
+    description:
+      "AI-powered ecological skill acquisition system. Adaptive constraint design, affordance mapping, neural feedback loops. Join the waitlist.",
+    type: "website",
+  },
+};
+
 export default function AttuneOSPage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="font-display text-6xl font-bold">Attune OS</h1>
-      <p className="mt-4 text-muted-foreground">The web app branch.</p>
-    </main>
-  );
+  return <OSClient />;
 }

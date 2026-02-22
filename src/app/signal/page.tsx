@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
+import { SignalClient } from "./SignalClient";
+
+export const metadata: Metadata = {
+  title: "The Signal — Weekly Intelligence on Ecological Mastery",
+  description:
+    "Free weekly newsletter. Filtering conventional wisdom to find what actually works in learning and skill acquisition. 538+ coaches, athletes, and learners already tuned in.",
+  openGraph: {
+    title: "The Signal — Weekly Intelligence on Ecological Mastery",
+    description:
+      "Free weekly newsletter on ecological dynamics and skill acquisition. 538+ subscribers. Pure signal, no noise.",
+    type: "website",
+  },
+};
+
 export default function SignalPage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="font-display text-6xl font-bold">The Signal</h1>
-      <p className="mt-4 text-muted-foreground">Substack &amp; content feed.</p>
-    </main>
-  );
+  return <SignalClient />;
 }
