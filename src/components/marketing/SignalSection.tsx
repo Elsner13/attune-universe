@@ -157,10 +157,10 @@ export function SignalSection() {
                 </h3>
 
                 <p className="mb-6 text-base leading-relaxed text-attune-starlight/50">
-                  Filtering conventional wisdom to find what actually works in
-                  learning and skill acquisition. Ecological dynamics for
-                  coaches, athletes, and anyone who wants to get better at
-                  things.
+                  A weekly brief on what skill acquisition actually looks like
+                  when the model is correct. No methods to memorize. No systems
+                  to install. Just a clearer picture of reality, delivered every
+                  week. Free, always.
                 </p>
 
                 <div className="mb-8 h-px w-full bg-linear-to-r from-attune-yellow/20 to-transparent" />

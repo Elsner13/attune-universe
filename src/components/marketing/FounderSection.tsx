@@ -90,48 +90,16 @@ export function FounderSection() {
                 solution from within it. Nobody had taught her to attune.
               </motion.p>
 
-              {/* Body copy 3 */}
+              {/* Closing line */}
               <motion.p
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-                className="mb-6 text-base leading-[1.8] text-attune-starlight/60 md:text-[17px]"
+                className="mb-10 text-base italic leading-[1.8] text-attune-starlight/60 md:text-[17px]"
               >
-                I went looking for why. Not the motivational why. The scientific
-                why. I found James Gibson, I found Newell and Davids, I found a
-                body of research that had been sitting in academic journals for
-                sixty years explaining exactly what I had witnessed on that
-                court. Skill is not a stored program. It is a living
-                relationship between a body and its environment. The moment that
-                relationship is broken in training — the moment you optimize for
-                perfect mechanics in a sterile vacuum — you are not building a
-                performer. You are building a machine that shatters under
-                pressure.
-              </motion.p>
-
-              {/* Body copy 4 */}
-              <motion.p
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-                className="mb-10 text-base leading-[1.8] text-attune-starlight/60 md:text-[17px]"
-              >
-                I was a 2x NCAA National Champion and 6x All-American. I had
-                lived this science from the inside without knowing its name.
-                Building Attune was not a business decision. It was the only
-                honest thing left to do.
-              </motion.p>
-
-              {/* Signature */}
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.8 }}
-                className="mb-10 font-display text-xl italic text-attune-starlight/40"
-              >
+                I went looking for the scientific why. What I found changed
+                everything I thought I knew about how skill actually forms.
                 — Sam Elsner
               </motion.p>
 

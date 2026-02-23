@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Hero } from "@/components/marketing/Hero";
 import { FoundationsSection } from "@/components/marketing/FoundationsSection";
 import { AttractorSection } from "@/components/marketing/AttractorSection";
-import { AttuneOSSection } from "@/components/marketing/AttuneOSSection";
 import { SignalSection } from "@/components/marketing/SignalSection";
 import { CosmicFooter } from "@/components/marketing/CosmicFooter";
 import { ConstellationCanvas } from "@/components/marketing/ConstellationCanvas";
@@ -87,7 +86,6 @@ export default function UniverseHub() {
         <FounderSection />
         <FoundationsSection />
         <AttractorSection />
-        <AttuneOSSection />
         <SignalSection />
         <CosmicFooter />
 
