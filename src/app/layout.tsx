@@ -1,65 +1,51 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Playfair_Display,
-  Inter_Tight,
-} from "next/font/google";
+import { DM_Sans, Instrument_Serif } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
-import { Navbar } from "@/components/marketing/Navbar";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
   subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const interTight = Inter_Tight({
-  variable: "--font-inter-tight",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-display",
+  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "ATTUNE — Stop Learning. Start Mastering.",
-    template: "%s | ATTUNE",
+    default: "Attune — The Science of Skill Acquisition",
+    template: "%s — Attune",
   },
   description:
-    "Master any domain faster than traditional methods. Use the Attune OS and Ecological Psychology to align your perception and action for elite performance.",
+    "Ecological dynamics reveals why most practice fails. Attune gives you the science, the system, and the community to learn the way your brain was designed to.",
   keywords: [
-    "Ecological Psychology",
-    "Skill Acquisition",
-    "Attune OS",
-    "Personal Brand",
-    "Learning Framework",
+    "ecological dynamics",
+    "skill acquisition",
+    "motor learning",
+    "coaching science",
+    "perception-action coupling",
+    "constraints-led approach",
   ],
   metadataBase: new URL("https://attune.world"),
   openGraph: {
-    title: "ATTUNE — Stop Learning. Start Mastering.",
+    title: "Attune — The Science of Skill Acquisition",
     description:
-      "Master any domain faster than traditional methods. Use the Attune OS and Ecological Psychology to align your perception and action for elite performance.",
+      "Ecological dynamics reveals why most practice fails. Attune gives you the science, the system, and the community to learn the way your brain was designed to.",
     url: "https://attune.world",
-    siteName: "ATTUNE",
+    siteName: "Attune",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Attune — Ecological Mastery",
+        alt: "Attune — The Science of Skill Acquisition",
       },
     ],
     locale: "en_US",
@@ -67,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ATTUNE — Stop Learning. Start Mastering.",
+    title: "Attune — The Science of Skill Acquisition",
     description:
-      "Master any domain faster than traditional methods. Use the Attune OS and Ecological Psychology to align your perception and action for elite performance.",
+      "Ecological dynamics reveals why most practice fails. Attune gives you the science, the system, and the community to learn the way your brain was designed to.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -87,20 +73,19 @@ export default function RootLayout({
       appearance={{
         baseTheme: dark,
         variables: {
-          colorPrimary: "#00F0FF",
+          colorPrimary: "#c8ff3c",
           colorBackground: "#0a0a0a",
-          colorInputBackground: "#121212",
-          colorInputText: "#f8fafc",
-          borderRadius: "0.625rem",
+          colorInputBackground: "#161616",
+          colorInputText: "#e8e8e8",
+          borderRadius: "0px",
         },
       }}
     >
       <html lang="en" className="dark">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${interTight.variable} antialiased`}
+          className={`${dmSans.variable} ${instrumentSerif.variable} antialiased`}
         >
           <SmoothScrollProvider>
-            <Navbar />
             {children}
           </SmoothScrollProvider>
         </body>
