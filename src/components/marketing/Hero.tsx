@@ -51,10 +51,12 @@ export function Hero() {
           variants={fadeUp}
           className="mt-8 max-w-2xl text-base leading-relaxed text-attune-starlight/50 sm:text-lg"
         >
-          Attune is built on how skill actually develops in the real world
-          — not how we were taught it should. The gap between your practice
-          and your performance is not a talent problem. It is a model
-          problem. And the model is wrong.
+          You perform well in practice. You fall apart when it actually
+          matters. You have tried every method, every system, every
+          technique. Nothing has closed the gap. Attune is built on the
+          one thing nobody told you: the gap is not a you problem. It is
+          a model problem. And once you see the model clearly, you can
+          learn anything.
         </motion.p>
 
         {/* ── CTA Buttons ── */}

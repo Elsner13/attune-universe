@@ -104,10 +104,13 @@ export function FounderSection() {
                 transition={{ duration: 0.7, ease: EASE }}
                 className="mb-6 text-base leading-[1.8] text-attune-starlight/60 md:text-[17px]"
               >
-                24-23. Third match. The set came in and her stance was off —
-                weight distributed wrong, feet not where ten thousand practice
-                reps had placed them. She jumped anyway. Her body executed the
-                spike it knew. The ball went into the net. 24-24. They lost.
+                She had done everything right. Ten thousand reps. Perfect
+                mechanics. She was the best athlete on the court by every
+                measurable standard. And when the moment arrived, her body
+                executed exactly what practice had built. The ball hit the
+                net. They lost. This is not a story about effort. It is a
+                story about what practice had actually been building all
+                along.
               </motion.p>
 
               {/* Body copy 2 */}
