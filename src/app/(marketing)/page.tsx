@@ -9,7 +9,6 @@ import { AttuneOSSection } from "@/components/marketing/AttuneOSSection";
 import { SignalSection } from "@/components/marketing/SignalSection";
 import { CosmicFooter } from "@/components/marketing/CosmicFooter";
 import { ConstellationCanvas } from "@/components/marketing/ConstellationCanvas";
-import { CommandCenter } from "@/components/marketing/CommandCenter";
 import { FounderSection } from "@/components/marketing/FounderSection";
 
 const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -73,9 +72,8 @@ export default function UniverseHub() {
     <>
       <ScrollProgress />
       <ScrollBackdrop />
-      <CommandCenter />
 
-      <main className="noise-overlay relative lg:pl-14">
+      <main className="noise-overlay relative">
         <motion.div
           className="pointer-events-none fixed inset-0 z-0 will-change-transform"
           style={{ scale: warpScale, opacity: warpOpacity }}
@@ -93,8 +91,6 @@ export default function UniverseHub() {
         <SignalSection />
         <CosmicFooter />
 
-        {/* Mobile dock spacer */}
-        <div className="h-20 lg:hidden" />
       </main>
     </>
   );

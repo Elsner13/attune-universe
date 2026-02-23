@@ -8,6 +8,7 @@ import {
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { Navbar } from "@/components/marketing/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -98,7 +99,10 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${interTight.variable} antialiased`}
         >
-          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          <SmoothScrollProvider>
+            <Navbar />
+            {children}
+          </SmoothScrollProvider>
         </body>
       </html>
     </ClerkProvider>
