@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -11,39 +9,6 @@ const credentials = [
   "6× NCAA ALL-AMERICAN",
   "500+ COACHES TRAINED",
 ];
-
-function FounderImage() {
-  const [imgError, setImgError] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, ease: EASE }}
-      className="flex flex-col items-center md:items-start"
-    >
-      <div
-        className="relative w-full overflow-hidden rounded-[4px] border border-[#38BDF8]/20 bg-[#0a0a0a] shadow-[0_0_60px_rgba(56,189,248,0.06)] md:max-w-[480px]"
-        style={{ aspectRatio: "4 / 5" }}
-      >
-        {!imgError && (
-          <Image
-            src="/images/founder.jpg"
-            alt="Sam Elsner — Founder of Attune"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 480px"
-            onError={() => setImgError(true)}
-          />
-        )}
-      </div>
-      <p className="mt-4 text-center font-mono text-[11px] uppercase tracking-widest text-attune-starlight/30 md:text-left">
-        SAM ELSNER — FOUNDER, ATTUNE
-      </p>
-    </motion.div>
-  );
-}
 
 export function FounderSection() {
   return (
@@ -56,12 +21,7 @@ export function FounderSection() {
       {/* Top separator line */}
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#38BDF8]/10 to-transparent" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-[80px]">
-          {/* Left column — Image */}
-          <FounderImage />
-
-          {/* Right column — Text */}
+      <div className="relative z-10 mx-auto max-w-3xl px-6 sm:px-10 lg:px-16">
           <div className="relative">
             {/* Radial gradient atmosphere */}
             <div
@@ -203,7 +163,6 @@ export function FounderSection() {
               </motion.div>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );
