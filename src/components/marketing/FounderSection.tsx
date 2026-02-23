@@ -4,11 +4,6 @@ import { motion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const credentials = [
-  "2× NCAA NATIONAL CHAMPION",
-  "6× NCAA ALL-AMERICAN",
-  "500+ COACHES TRAINED",
-];
 
 export function FounderSection() {
   return (
@@ -103,32 +98,6 @@ export function FounderSection() {
                 — Sam Elsner
               </motion.p>
 
-              {/* Divider */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, ease: EASE }}
-                className="mb-10 h-px w-[60px] origin-left bg-[#38BDF8]/40"
-              />
-
-              {/* Credential pills */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, ease: EASE }}
-                className="flex flex-wrap gap-3"
-              >
-                {credentials.map((label) => (
-                  <span
-                    key={label}
-                    className="rounded-full border border-[#38BDF8]/15 bg-[#38BDF8]/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-attune-starlight/50"
-                  >
-                    {label}
-                  </span>
-                ))}
-              </motion.div>
             </div>
           </div>
       </div>
