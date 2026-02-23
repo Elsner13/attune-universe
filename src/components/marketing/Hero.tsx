@@ -35,18 +35,6 @@ export function Hero() {
         animate="visible"
         className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-5 pb-24 pt-28 text-center sm:px-8 lg:px-12 lg:pt-36"
       >
-        {/* ── Credibility Bar ── */}
-        <motion.div
-          variants={fadeUp}
-          className="mb-16 font-mono text-[10px] uppercase tracking-[0.25em] text-attune-starlight/40 sm:text-xs lg:mb-20"
-        >
-          2x NCAA National Champion{" "}
-          <span className="text-[#38BDF8]/60">&middot;</span> 6x NCAA
-          All-American{" "}
-          <span className="text-[#38BDF8]/60">&middot;</span> 500+ Coaches
-          &amp; Athletes Trained
-        </motion.div>
-
         {/* ── Headline ── */}
         <motion.h1
           variants={fadeUp}
